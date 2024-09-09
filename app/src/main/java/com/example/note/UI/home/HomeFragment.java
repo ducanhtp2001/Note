@@ -166,18 +166,15 @@ public class HomeFragment extends Fragment {
         });
 
         // Handle item click event
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Note selectedNote = notes.get(position);
-                if (selectedNote != null) {
-                    Intent intent = new Intent(getActivity(), EditNoteActivity.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable("note", selectedNote);
-                    bundle.putString("idSinhVien", idSinhVienstr);
-                    intent.putExtras(bundle);
-                    startActivityForResult(intent, RESULT_CODE_EDITNOTE);
-                }
+        listView.setOnItemClickListener((parent, view, position, id) -> {
+            Note selectedNote = notes.get(position);
+            if (selectedNote != null) {
+                Intent intent = new Intent(getActivity(), EditNoteActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("note", selectedNote);
+                bundle.putString("idSinhVien", idSinhVienstr);
+                intent.putExtras(bundle);
+                startActivityForResult(intent, RESULT_CODE_EDITNOTE);
             }
         });
         
@@ -197,21 +194,19 @@ public class HomeFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-        switch (id) {
-            case R.id.action_search:
-                showSearch();
-                return true;
-            case R.id.action_sort_by_create:
-                sortByCreate();
-                return true;
-            case R.id.action_sort_by_modify:
-                shortByModify();
-                return true;
-
+        if (id == R.id.action_search) {
+            showSearch();
+            return true;
+        } else if (id == R.id.action_sort_by_create) {
+            sortByCreate();
+            return true;
+        } else if (id == R.id.action_sort_by_modify) {
+            shortByModify();
+            return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
+
 
     private void shortByModify() {
         Toast.makeText(getActivity(), "Sort by modify time", Toast.LENGTH_SHORT).show();
