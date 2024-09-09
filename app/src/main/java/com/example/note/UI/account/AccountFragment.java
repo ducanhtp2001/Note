@@ -17,7 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
-import com.example.note.ApiService.ApiService;
+import com.example.note.ApiService.ApiClient;
 import com.example.note.MainActivity;
 import com.example.note.Model.ResponseAvatar;
 import com.example.note.Model.ResponseStatus;
@@ -149,7 +149,7 @@ public class AccountFragment extends Fragment {
                         avtMap.put("id", SinhVien.getIdFromMaSinhVien(idSinhVien));
                         avtMap.put("url", url);
 
-                        ApiService.apiService.setAvatarUrl(avtMap).enqueue(new retrofit2.Callback<ResponseStatus>() {
+                        ApiClient.getApiService().setAvatarUrl(avtMap).enqueue(new retrofit2.Callback<ResponseStatus>() {
                             @Override
                             public void onResponse(retrofit2.Call<ResponseStatus> call, retrofit2.Response<ResponseStatus> response) {
                                 Log.e("TAG", "onResponse: " + response.body().toString());
@@ -191,7 +191,7 @@ public class AccountFragment extends Fragment {
         Map idMap = new HashMap();
         idMap.put("id", SinhVien.getIdFromMaSinhVien(idSinhVien));
 
-        ApiService.apiService.getAvatarUrl(idMap).enqueue(new retrofit2.Callback<ResponseAvatar>() {
+        ApiClient.getApiService().getAvatarUrl(idMap).enqueue(new retrofit2.Callback<ResponseAvatar>() {
             @Override
             public void onResponse(retrofit2.Call<ResponseAvatar> call, retrofit2.Response<ResponseAvatar> response) {
                 Log.e("TAG", "onResponse: " + response.body().toString());

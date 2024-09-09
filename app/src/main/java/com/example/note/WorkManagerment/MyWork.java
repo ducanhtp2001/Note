@@ -12,7 +12,7 @@ import androidx.work.Data;
 import androidx.work.Worker;
 import androidx.work.WorkerParameters;
 
-import com.example.note.ApiService.ApiService;
+import com.example.note.ApiService.ApiClient;
 import com.example.note.Model.ResponseSchedule;
 import com.example.note.Model.Schedule;
 import com.example.note.Model.SinhVien;
@@ -48,7 +48,7 @@ public class MyWork extends Worker {
     private void callApi(String idSinhVien) {
         Map id = new HashMap();
         id.put("id", SinhVien.getIdFromMaSinhVien(idSinhVien));
-        ApiService.apiService.getSchedules(id).enqueue(new Callback<ResponseSchedule>() {
+        ApiClient.getApiService().getSchedules(id).enqueue(new Callback<ResponseSchedule>() {
             @Override
             public void onResponse(Call<ResponseSchedule> call, Response<ResponseSchedule> response) {
                 Log.e("TAG", "onResponse: " + response.body().toString());

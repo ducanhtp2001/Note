@@ -177,7 +177,7 @@ public class RegisterActivity extends AppCompatActivity {
                     OkHttpClient client = new OkHttpClient();
                     MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
                     String idSinhVien = ed_studentid.getText().toString();
-                    int id = SinhVien.getIdFromMaSinhVien(ed_studentid.getText().toString());
+                    int id = SinhVien.getIdFromMaSinhVien(ed_studentid.getText().toString().trim());
                     int khoa = SinhVien.getKhoaFromMaSinhVien(idSinhVien);
                     int nienKhoa = SinhVien.getNienKhoaFromMaSinhVien(idSinhVien);
                     int lop = SinhVien.getLopFromMaSinhVien(idSinhVien);
@@ -195,49 +195,53 @@ public class RegisterActivity extends AppCompatActivity {
 //                    tv_fullname.setText(json);
 //                    RequestBody requestBody = RequestBody.create(mediaType, json);
                     Request request = new Request.Builder()
-                            .url("https://ttcs-test.000webhostapp.com/androidApi/checkRegister.php")
+                            .url("http://http://192.168.48.1//note/api//checkRegister.php")
                             .post(RequestBody.create(mediaType, json))
                             .build();
-                    client.newCall(request).enqueue(new Callback() {
-                        @Override
-                        public void onFailure(Call call, IOException e) {
-                            Log.e("Error", "Network Error");
-                        }
+                    try {
+                        client.newCall(request).enqueue(new Callback() {
+                            @Override
+                            public void onFailure(Call call, IOException e) {
+                                Log.e("Error", "Network Error");
+                            }
 
-                        @Override
-                        public void onResponse(Call call, Response response) throws IOException {
-                            // Lấy thông tin JSON trả về. Bạn có thể log lại biến json này để xem nó như thế nào.
-                            String json = response.body().string();
+                            @Override
+                            public void onResponse(Call call, Response response) throws IOException {
+                                // Lấy thông tin JSON trả về. Bạn có thể log lại biến json này để xem nó như thế nào.
+                                String json = response.body().string();
 
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
 //                                    Toast.makeText(RegisterActivity.this, json, Toast.LENGTH_SHORT).show();
-                                    Gson gson = new Gson();
-                                    JsonElement jsonElement = gson.fromJson(json, JsonElement.class);
-                                    JsonObject jsonObject = jsonElement.getAsJsonObject();
-                                    String tenSinhVien = "";
-                                    boolean status = false;
-                                    if (jsonObject.has("tenSinhVien")) {
-                                        tenSinhVien = jsonObject.get("tenSinhVien").getAsString();
-                                    }
-                                    if (jsonObject.has("status")) {
-                                        status = jsonObject.get("status").getAsBoolean();
-                                    }
-                                    if(status) {
-                                        tv_fullname.setText(tenSinhVien);
-                                        hasStudent = true;
-                                    } else {
-                                        Toast.makeText(RegisterActivity.this, "Sinh viên không tồn tại", Toast.LENGTH_SHORT).show();
-                                        tv_fullname.setText(tenSinhVien);
-                                        hasStudent = false;
-                                    }
+                                        Gson gson = new Gson();
+                                        JsonElement jsonElement = gson.fromJson(json, JsonElement.class);
+                                        JsonObject jsonObject = jsonElement.getAsJsonObject();
+                                        String tenSinhVien = "";
+                                        boolean status = false;
+                                        if (jsonObject.has("tenSinhVien")) {
+                                            tenSinhVien = jsonObject.get("tenSinhVien").getAsString();
+                                        }
+                                        if (jsonObject.has("status")) {
+                                            status = jsonObject.get("status").getAsBoolean();
+                                        }
+                                        if(status) {
+                                            tv_fullname.setText(tenSinhVien);
+                                            hasStudent = true;
+                                        } else {
+                                            Toast.makeText(RegisterActivity.this, "Sinh viên không tồn tại", Toast.LENGTH_SHORT).show();
+                                            tv_fullname.setText(tenSinhVien);
+                                            hasStudent = false;
+                                        }
 
-                                }
-                            });
+                                    }
+                                });
 
-                        }
-                    });
+                            }
+                        });
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         });

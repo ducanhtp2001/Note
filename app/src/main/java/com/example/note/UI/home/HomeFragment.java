@@ -30,7 +30,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.example.note.Adapter.NoteAdapter;
-import com.example.note.ApiService.ApiService;
+import com.example.note.ApiService.ApiClient;
 import com.example.note.MainActivity;
 import com.example.note.Model.Note;
 import com.example.note.Model.ResponseNote;
@@ -57,13 +57,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import okhttp3.CipherSuite;
-import okhttp3.ConnectionSpec;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
-import okhttp3.TlsVersion;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -273,7 +270,7 @@ public class HomeFragment extends Fragment {
         int idSinhVien = SinhVien.getIdFromMaSinhVien(this.idSinhVienstr);
         Map<String, Integer> idMap = new HashMap<>();
         idMap.put("id", idSinhVien);
-        ApiService.apiService.getNoteById(idMap).enqueue(new Callback<ResponseNote>() {
+        ApiClient.getApiService().getNoteById(idMap).enqueue(new Callback<ResponseNote>() {
             @Override
             public void onResponse(Call<ResponseNote> call, Response<ResponseNote> response) {
                 Log.e("TAG", "onResponse: " + response.body().toString());

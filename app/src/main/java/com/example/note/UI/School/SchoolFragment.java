@@ -14,9 +14,8 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.note.Adapter.ClassAdapter;
-import com.example.note.ApiService.ApiService;
+import com.example.note.ApiService.ApiClient;
 import com.example.note.Data.UserData;
-import com.example.note.MainActivity;
 import com.example.note.Model.Course;
 import com.example.note.Model.ResponseClass;
 import com.example.note.Model.SinhVien;
@@ -76,7 +75,7 @@ public class SchoolFragment extends Fragment {
         int idSinhVien = SinhVien.getIdFromMaSinhVien(this.idSinhVienStr);
         Map<String, Integer> idMap = new HashMap<>();
         idMap.put("id", idSinhVien);
-        ApiService.apiService.getClassById(idMap).enqueue(new Callback<ResponseClass>() {
+        ApiClient.getApiService().getClassById(idMap).enqueue(new Callback<ResponseClass>() {
             @Override
             public void onResponse(Call<ResponseClass> call, Response<ResponseClass> response) {
                 Log.e("TAG", "onResponse: " + response.body().toString());
