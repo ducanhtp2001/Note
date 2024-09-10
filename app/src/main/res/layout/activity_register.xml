@@ -50,6 +50,9 @@
                 android:padding="8dp"
                 android:textColor="@color/black"
                 android:textColorHighlight="@color/cardview_dark_background"
+                android:imeOptions="actionNext"
+                android:nextFocusForward="@id/password"
+                android:inputType="text"
                 android:layout_marginTop="40dp"/>
 
             <TextView
@@ -78,6 +81,8 @@
                 android:padding="8dp"
                 android:textColor="@color/black"
                 android:inputType="textPassword"
+                android:imeOptions="actionNext"
+                android:nextFocusForward="@id/passwordConfirm"
                 android:textColorHighlight="@color/cardview_dark_background"
                 android:layout_marginTop="20dp"/>
 
@@ -92,6 +97,7 @@
                 android:hint="Confirm Password"
                 android:inputType="textPassword"
                 android:padding="8dp"
+                android:imeOptions="actionDone"
                 android:textColor="@color/black"
                 android:textColorHighlight="@color/cardview_dark_background" />
 

@@ -9,6 +9,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
 
+    public static final String SERVER_URL = "http://192.168.2.106:8080/note/api/";
+
     private static final Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 
     public static ApiService getApiService() {
@@ -21,7 +23,7 @@ public class ApiClient {
                 .build();
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.48.1/note/api/")
+                .baseUrl(SERVER_URL)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .client(httpClient)
                 .build();
