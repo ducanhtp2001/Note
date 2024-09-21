@@ -1,4 +1,4 @@
-package com.example.note
+package com.example.note.activities.register
 
 import android.content.Intent
 import android.os.Bundle
@@ -12,10 +12,15 @@ import android.view.inputmethod.EditorInfo
 import android.widget.CheckBox
 import android.widget.TextView.OnEditorActionListener
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.note.ApiService.ApiClient
 import com.example.note.Data.model.SinhVien
 import com.example.note.Data.model.TaiKhoan
+import com.example.note.activities.login.LoginActivity
+import com.example.note.R
+import com.example.note.base.BaseActivity
+import com.example.note.base.BaseViewModel
 import com.example.note.databinding.ActivityRegisterBinding
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -34,13 +39,13 @@ import java.io.IOException
 import java.util.Locale
 
 
-class RegisterActivity : AppCompatActivity() {
+class RegisterActivity : BaseActivity<ActivityRegisterBinding>() {
 
     var hasStudent: Boolean = false
-    
-    private val binding: ActivityRegisterBinding by lazy {
-        ActivityRegisterBinding.inflate(LayoutInflater.from(this))
+    override val bindingInflater: (LayoutInflater) -> ActivityRegisterBinding = { layoutInflater ->
+        ActivityRegisterBinding.inflate(layoutInflater)
     }
+    override val viewModel: RegisterViewModel by viewModels()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -321,6 +326,10 @@ class RegisterActivity : AppCompatActivity() {
                 e.printStackTrace()
             }
         })
+    }
+
+    override fun viewDidLoad() {
+
     }
 
     private fun checkPass(str: String): Boolean {

@@ -11,7 +11,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.note.LoginActivity;
+import com.example.note.activities.login.LoginActivity;
 import com.example.note.Data.model.SinhVien;
 import com.example.note.R;
 import com.google.gson.Gson;

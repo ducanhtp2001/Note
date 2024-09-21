@@ -1,4 +1,4 @@
-package com.example.note
+package com.example.note.activities.login
 
 import android.content.Intent
 import android.os.Bundle
@@ -12,6 +12,10 @@ import android.widget.CheckBox
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.note.ApiService.ApiClient
+import com.example.note.ForgetPassActivity
+import com.example.note.MainActivity
+import com.example.note.R
+import com.example.note.activities.register.RegisterActivity
 import com.example.note.databinding.ActivityLoginBinding
 import com.google.gson.Gson
 import com.google.gson.JsonElement
