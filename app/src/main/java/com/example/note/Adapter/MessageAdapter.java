@@ -87,7 +87,7 @@ public class MessageAdapter extends ArrayAdapter<Message> {
                 LinearLayout.LayoutParams.MATCH_PARENT
         );
 
-        if (message.getIdSinhVien() == SinhVien.getIdFromMaSinhVien(UserData.getIdSinhVien())) {
+        if (message.getIdSinhVien() == SinhVien.Companion.getIdFromMaSinhVien(UserData.getIdSinhVien())) {
 
             layoutParams.gravity = Gravity.RIGHT;
             viewHolder.tvFrom.setText("Tôi");

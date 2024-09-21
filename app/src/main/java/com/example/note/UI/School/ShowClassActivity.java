@@ -242,7 +242,7 @@ public class ShowClassActivity extends AppCompatActivity {
         OkHttpClient client = new OkHttpClient();
         MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
         JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("id", SinhVien.getIdFromMaSinhVien(UserData.getIdSinhVien()));
+        jsonObject.addProperty("id", SinhVien.Companion.getIdFromMaSinhVien(UserData.getIdSinhVien()));
         jsonObject.addProperty("maMon", course.getMaMon());
         jsonObject.addProperty("lopTinChi", course.getLopTinChi());
 

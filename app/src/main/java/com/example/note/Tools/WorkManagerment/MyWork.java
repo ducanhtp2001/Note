@@ -47,7 +47,7 @@ public class MyWork extends Worker {
 
     private void callApi(String idSinhVien) {
         Map id = new HashMap();
-        id.put("id", SinhVien.getIdFromMaSinhVien(idSinhVien));
+        id.put("id", SinhVien.Companion.getIdFromMaSinhVien(idSinhVien));
         ApiClient.getApiService().getSchedules(id).enqueue(new Callback<ResponseSchedule>() {
             @Override
             public void onResponse(Call<ResponseSchedule> call, Response<ResponseSchedule> response) {
