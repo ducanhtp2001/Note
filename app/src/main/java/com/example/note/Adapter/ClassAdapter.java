@@ -1,7 +1,6 @@
 package com.example.note.Adapter;
 
 import android.app.Activity;
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.example.note.Model.Course;
+import com.example.note.Data.model.Course;
 import com.example.note.R;
 
 import java.util.List;

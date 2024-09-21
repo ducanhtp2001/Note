@@ -16,9 +16,9 @@ import android.widget.Toast;
 import com.example.note.Adapter.ClassAdapter;
 import com.example.note.ApiService.ApiClient;
 import com.example.note.Data.UserData;
-import com.example.note.Model.Course;
-import com.example.note.Model.ResponseClass;
-import com.example.note.Model.SinhVien;
+import com.example.note.Data.model.Course;
+import com.example.note.Data.model.ResponseClass;
+import com.example.note.Data.model.SinhVien;
 import com.example.note.R;
 import com.example.note.databinding.FragmentSchoolBinding;
 
@@ -72,7 +72,7 @@ public class SchoolFragment extends Fragment {
     }
 
     private void callApi() {
-        int idSinhVien = SinhVien.getIdFromMaSinhVien(this.idSinhVienStr);
+        int idSinhVien = SinhVien.Companion.getIdFromMaSinhVien(this.idSinhVienStr);
         Map<String, Integer> idMap = new HashMap<>();
         idMap.put("id", idSinhVien);
         ApiClient.getApiService().getClassById(idMap).enqueue(new Callback<ResponseClass>() {

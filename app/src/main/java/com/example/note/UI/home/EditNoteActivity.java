@@ -14,8 +14,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.note.Data.UserData;
-import com.example.note.Model.Note;
-import com.example.note.Model.SinhVien;
+import com.example.note.Data.model.Note;
+import com.example.note.Data.model.SinhVien;
 import com.example.note.R;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
@@ -107,7 +107,7 @@ public class EditNoteActivity extends AppCompatActivity {
 
         Note updateNote = new Note(note.getId(), title, lastTimeEdited, lastTimeEdited, content, note.getNoiDungCua());
 
-        int idSinhVien = SinhVien.getIdFromMaSinhVien(UserData.getIdSinhVien());
+        int idSinhVien = SinhVien.Companion.getIdFromMaSinhVien(UserData.getIdSinhVien());
 
         OkHttpClient client = new OkHttpClient();
         MediaType mediaType = MediaType.parse("application/json; charset=utf-8");

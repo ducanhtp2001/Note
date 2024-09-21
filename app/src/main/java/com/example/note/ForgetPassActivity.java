@@ -17,8 +17,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.note.Model.SinhVien;
-import com.example.note.Model.TaiKhoan;
+import com.example.note.Data.model.SinhVien;
+import com.example.note.Data.model.TaiKhoan;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
@@ -78,10 +78,10 @@ public class ForgetPassActivity extends AppCompatActivity {
                     OkHttpClient client = new OkHttpClient();
                     MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
                     String idSinhVien = ed_studentid.getText().toString();
-                    int id = SinhVien.getIdFromMaSinhVien(idSinhVien);
-                    int khoa = SinhVien.getKhoaFromMaSinhVien(idSinhVien);
-                    int nienKhoa = SinhVien.getNienKhoaFromMaSinhVien(idSinhVien);
-                    int lop = SinhVien.getLopFromMaSinhVien(idSinhVien);
+                    int id = SinhVien.Companion.getIdFromMaSinhVien(idSinhVien);
+                    int khoa = SinhVien.Companion.getKhoaFromMaSinhVien(idSinhVien);
+                    int nienKhoa = SinhVien.Companion.getNienKhoaFromMaSinhVien(idSinhVien);
+                    int lop = SinhVien.Companion.getLopFromMaSinhVien(idSinhVien);
 
                     // Tạo đối tượng JSON
                     JsonObject jsonObject = new JsonObject();
@@ -177,10 +177,10 @@ public class ForgetPassActivity extends AppCompatActivity {
                     OkHttpClient client = new OkHttpClient();
                     MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
                     String idSinhVien = ed_studentid.getText().toString();
-                    int id = SinhVien.getIdFromMaSinhVien(ed_studentid.getText().toString());
-                    int khoa = SinhVien.getKhoaFromMaSinhVien(idSinhVien);
-                    int nienKhoa = SinhVien.getNienKhoaFromMaSinhVien(idSinhVien);
-                    int lop = SinhVien.getLopFromMaSinhVien(idSinhVien);
+                    int id = SinhVien.Companion.getIdFromMaSinhVien(ed_studentid.getText().toString());
+                    int khoa = SinhVien.Companion.getKhoaFromMaSinhVien(idSinhVien);
+                    int nienKhoa = SinhVien.Companion.getNienKhoaFromMaSinhVien(idSinhVien);
+                    int lop = SinhVien.Companion.getLopFromMaSinhVien(idSinhVien);
 
                     // Tạo đối tượng JSON
                     JsonObject jsonObject = new JsonObject();
@@ -261,7 +261,7 @@ public class ForgetPassActivity extends AppCompatActivity {
                 if(ed_password.getText().toString().equals(ed_passwordConfirm.getText().toString())) {
                     if(!checkPass(ed_password.getText().toString())) return;
 
-                    TaiKhoan tk = new TaiKhoan(SinhVien.getIdFromMaSinhVien(ed_studentid.getText().toString()),
+                    TaiKhoan tk = new TaiKhoan(SinhVien.Companion.getIdFromMaSinhVien(ed_studentid.getText().toString()),
                             ed_studentid.getText().toString().toUpperCase(),
                             ed_password.getText().toString());
 

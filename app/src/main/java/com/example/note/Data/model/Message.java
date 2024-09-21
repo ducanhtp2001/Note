@@ -1,4 +1,4 @@
-package com.example.note.Model;
+package com.example.note.Data.model;
 
 import android.graphics.Bitmap;
 

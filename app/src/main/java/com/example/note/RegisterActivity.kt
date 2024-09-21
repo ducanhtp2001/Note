@@ -14,9 +14,8 @@ import android.widget.TextView.OnEditorActionListener
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.note.ApiService.ApiClient
-import com.example.note.ApiService.ApiService
-import com.example.note.Model.SinhVien
-import com.example.note.Model.TaiKhoan
+import com.example.note.Data.model.SinhVien
+import com.example.note.Data.model.TaiKhoan
 import com.example.note.databinding.ActivityRegisterBinding
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -33,6 +32,7 @@ import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import java.io.IOException
 import java.util.Locale
+
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -261,7 +261,9 @@ class RegisterActivity : AppCompatActivity() {
                     if (!checkPass(binding.password.getText().toString())) return@OnClickListener
 
                     val tk = TaiKhoan(
-                        SinhVien.getIdFromMaSinhVien(binding.edStudentid.getText().toString()),
+                        SinhVien.getIdFromMaSinhVien(
+                            binding.edStudentid.getText().toString()
+                        ),
                         binding.edStudentid.getText().toString().uppercase(Locale.getDefault()),
                         binding.password.getText().toString()
                     )

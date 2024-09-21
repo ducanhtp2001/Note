@@ -10,7 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.example.note.Model.SinhVien;
+import com.example.note.Data.model.SinhVien;
 import com.example.note.R;
 
 import java.util.List;

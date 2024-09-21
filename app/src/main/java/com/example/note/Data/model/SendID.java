@@ -1,4 +1,4 @@
-package com.example.note.Model;
+package com.example.note.Data.model;
 
 public class SendID {
     int idSinhVien;

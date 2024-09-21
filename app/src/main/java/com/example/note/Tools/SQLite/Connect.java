@@ -1,4 +1,4 @@
-package com.example.note.SQLite;
+package com.example.note.Tools.SQLite;
 
 import android.content.Context;
 import android.database.Cursor;

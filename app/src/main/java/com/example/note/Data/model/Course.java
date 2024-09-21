@@ -1,9 +1,8 @@
-package com.example.note.Model;
+package com.example.note.Data.model;
 
 import androidx.annotation.NonNull;
 
 import java.io.Serializable;
-import java.util.List;
 
 public class Course implements Serializable {
     private int maMon;

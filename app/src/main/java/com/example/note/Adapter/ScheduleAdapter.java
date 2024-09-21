@@ -10,7 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.example.note.Model.Schedule;
+import com.example.note.Data.model.Schedule;
 import com.example.note.R;
 
 import java.util.ArrayList;

@@ -15,8 +15,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.note.Data.UserData;
-import com.example.note.Model.Message;
-import com.example.note.Model.SinhVien;
+import com.example.note.Data.model.Message;
+import com.example.note.Data.model.SinhVien;
 import com.example.note.R;
 import com.example.note.Tools.AnotherTools.ConvertImg;
 

@@ -7,10 +7,10 @@ import android.util.Log;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.note.Model.NoteInTrash;
-import com.example.note.Model.SinhVien;
-import com.example.note.SQLite.Connect;
-import com.example.note.SQLite.ConnectSharing;
+import com.example.note.Data.model.NoteInTrash;
+import com.example.note.Data.model.SinhVien;
+import com.example.note.Tools.SQLite.Connect;
+import com.example.note.Tools.SQLite.ConnectSharing;
 import com.example.note.Tools.SecutityTools.KeyStoreSystem_RSA;
 
 import java.util.ArrayList;
@@ -42,7 +42,7 @@ public class TrashFragmentViewModel extends ViewModel {
 
     private void loadDataFromSQLite() {
         noteList.clear();
-        String query = "SELECT * FROM note WHERE idsinhvien = " + SinhVien.getIdFromMaSinhVien(this.idSinhVien);
+        String query = "SELECT * FROM note WHERE idsinhvien = " + SinhVien.Companion.getIdFromMaSinhVien(this.idSinhVien);
         Cursor data = connect.returnQuery(query);
 
         while(data.moveToNext()) {

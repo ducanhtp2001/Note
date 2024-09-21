@@ -32,12 +32,12 @@ import androidx.navigation.Navigation;
 import com.example.note.Adapter.NoteAdapter;
 import com.example.note.ApiService.ApiClient;
 import com.example.note.MainActivity;
-import com.example.note.Model.Note;
-import com.example.note.Model.ResponseNote;
-import com.example.note.Model.SinhVien;
+import com.example.note.Data.model.Note;
+import com.example.note.Data.model.ResponseNote;
+import com.example.note.Data.model.SinhVien;
 import com.example.note.R;
-import com.example.note.SQLite.Connect;
-import com.example.note.SQLite.ConnectSharing;
+import com.example.note.Tools.SQLite.Connect;
+import com.example.note.Tools.SQLite.ConnectSharing;
 import com.example.note.Tools.SecutityTools.KeyStoreSystem_RSA;
 import com.example.note.UI.Calendar.CalendarFragment;
 import com.example.note.UI.School.SchoolFragment;
@@ -262,7 +262,7 @@ public class HomeFragment extends Fragment {
 
     private void callApi() {
 //        listView.setAdapter(noteAdapter);
-        int idSinhVien = SinhVien.getIdFromMaSinhVien(this.idSinhVienstr);
+        int idSinhVien = SinhVien.Companion.getIdFromMaSinhVien(this.idSinhVienstr);
         Map<String, Integer> idMap = new HashMap<>();
         idMap.put("id", idSinhVien);
         ApiClient.getApiService().getNoteById(idMap).enqueue(new Callback<ResponseNote>() {
@@ -355,7 +355,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void callDeleteApi(Note selectedNote) {
-        int idSinhVien = SinhVien.getIdFromMaSinhVien(idSinhVienstr);
+        int idSinhVien = SinhVien.Companion.getIdFromMaSinhVien(idSinhVienstr);
         int id = selectedNote.getId();
 
         String query = "INSERT INTO note VALUES (null, " + idSinhVien +

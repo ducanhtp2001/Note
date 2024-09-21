@@ -12,7 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.note.LoginActivity;
-import com.example.note.Model.SinhVien;
+import com.example.note.Data.model.SinhVien;
 import com.example.note.R;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
@@ -89,7 +89,7 @@ public class ChangePassActivity extends AppCompatActivity {
         OkHttpClient client = new OkHttpClient();
         MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
         JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("id", SinhVien.getIdFromMaSinhVien(idSinhVien));
+        jsonObject.addProperty("id", SinhVien.Companion.getIdFromMaSinhVien(idSinhVien));
         jsonObject.addProperty("oldPass", oldP);
         jsonObject.addProperty("newPass", newP);
 

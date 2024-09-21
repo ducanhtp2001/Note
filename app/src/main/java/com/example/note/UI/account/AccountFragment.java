@@ -19,9 +19,9 @@ import androidx.fragment.app.Fragment;
 import com.bumptech.glide.Glide;
 import com.example.note.ApiService.ApiClient;
 import com.example.note.MainActivity;
-import com.example.note.Model.ResponseAvatar;
-import com.example.note.Model.ResponseStatus;
-import com.example.note.Model.SinhVien;
+import com.example.note.Data.model.ResponseAvatar;
+import com.example.note.Data.model.ResponseStatus;
+import com.example.note.Data.model.SinhVien;
 import com.example.note.R;
 import com.example.note.databinding.FragmentAccountBinding;
 import com.google.gson.Gson;
@@ -146,7 +146,7 @@ public class AccountFragment extends Fragment {
                         Toast.makeText(getContext(), "URL: " + url, Toast.LENGTH_SHORT).show();
 
                         Map avtMap = new HashMap();
-                        avtMap.put("id", SinhVien.getIdFromMaSinhVien(idSinhVien));
+                        avtMap.put("id", SinhVien.Companion.getIdFromMaSinhVien(idSinhVien));
                         avtMap.put("url", url);
 
                         ApiClient.getApiService().setAvatarUrl(avtMap).enqueue(new retrofit2.Callback<ResponseStatus>() {
@@ -189,7 +189,7 @@ public class AccountFragment extends Fragment {
 
     private void callGetAvatarApi() {
         Map idMap = new HashMap();
-        idMap.put("id", SinhVien.getIdFromMaSinhVien(idSinhVien));
+        idMap.put("id", SinhVien.Companion.getIdFromMaSinhVien(idSinhVien));
 
         ApiClient.getApiService().getAvatarUrl(idMap).enqueue(new retrofit2.Callback<ResponseAvatar>() {
             @Override
@@ -215,7 +215,7 @@ public class AccountFragment extends Fragment {
         OkHttpClient client = new OkHttpClient();
         MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
         JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("id", SinhVien.getIdFromMaSinhVien(idSinhVien));
+        jsonObject.addProperty("id", SinhVien.Companion.getIdFromMaSinhVien(idSinhVien));
 
         // Chuyển đối tượng JSON thành chuỗi
         String json = jsonObject.toString();

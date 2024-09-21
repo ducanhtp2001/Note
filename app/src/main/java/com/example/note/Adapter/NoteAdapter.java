@@ -12,9 +12,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.example.note.Model.Note;
+import com.example.note.Data.model.Note;
 import com.example.note.R;
-import com.example.note.Model.Note;
 
 import java.util.ArrayList;
 import java.util.List;

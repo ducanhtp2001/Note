@@ -1,36 +1,18 @@
 package com.example.note.ApiService;
 
-import com.example.note.Model.AvatarUrl;
-import com.example.note.Model.ResponseAvatar;
-import com.example.note.Model.ResponseClass;
-import com.example.note.Model.ResponseNote;
-import com.example.note.Model.ResponseSchedule;
-import com.example.note.Model.ResponseStatus;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.example.note.Data.model.ResponseAvatar;
+import com.example.note.Data.model.ResponseClass;
+import com.example.note.Data.model.ResponseNote;
+import com.example.note.Data.model.ResponseSchedule;
+import com.example.note.Data.model.ResponseStatus;
 
 import java.util.Map;
 
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Body;
 import retrofit2.http.POST;
 
 public interface ApiService {
-
-//    Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH-:mm:ss").create();
-//
-//    HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
-//    HttpLoggingInterceptor.Level level = HttpLoggingInterceptor.Level.BODY;
-//
-//    ApiService apiService = new Retrofit.Builder()
-////            .baseUrl("https://ttcs-test.000webhostapp.com/androidApi/")
-//            .baseUrl("http://http://192.168.48.1//note/api/")
-//            .addConverterFactory(GsonConverterFactory.create(gson))
-//            .build()
-//            .create(ApiService.class);
 
     @POST("getNote.php")
     Call<ResponseNote> getNoteById(@Body Map<String, Integer> id);

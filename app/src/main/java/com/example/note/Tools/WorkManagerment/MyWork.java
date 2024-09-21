@@ -1,4 +1,4 @@
-package com.example.note.WorkManagerment;
+package com.example.note.Tools.WorkManagerment;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -13,9 +13,9 @@ import androidx.work.Worker;
 import androidx.work.WorkerParameters;
 
 import com.example.note.ApiService.ApiClient;
-import com.example.note.Model.ResponseSchedule;
-import com.example.note.Model.Schedule;
-import com.example.note.Model.SinhVien;
+import com.example.note.Data.model.ResponseSchedule;
+import com.example.note.Data.model.Schedule;
+import com.example.note.Data.model.SinhVien;
 import com.example.note.R;
 
 import java.text.SimpleDateFormat;

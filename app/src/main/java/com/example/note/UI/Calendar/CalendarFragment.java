@@ -22,7 +22,6 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.note.Adapter.ScheduleAdapter;
-import com.example.note.LoginActivity;
 import com.example.note.UI.Calendar.CalendarToolsModel.DangKyHocJson;
 import com.example.note.UI.Calendar.CalendarToolsModel.LichHocStructure;
 import com.example.note.UI.Calendar.CalendarToolsModel.MonHoc;
@@ -30,8 +29,8 @@ import com.example.note.UI.Calendar.CalendarToolsModel.MyCell;
 import com.example.note.UI.Calendar.CalendarToolsModel.TableContent;
 import com.example.note.UI.home.AddNoteActivity;
 import com.example.note.MainActivity;
-import com.example.note.Model.Schedule;
-import com.example.note.Model.SinhVien;
+import com.example.note.Data.model.Schedule;
+import com.example.note.Data.model.SinhVien;
 import com.example.note.R;
 import com.example.note.databinding.FragmentCalendarBinding;
 import com.google.gson.Gson;
@@ -139,7 +138,7 @@ public class CalendarFragment extends Fragment {
         OkHttpClient client = new OkHttpClient();
         MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
         JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("id", SinhVien.getIdFromMaSinhVien(idSinhVien));
+        jsonObject.addProperty("id", SinhVien.Companion.getIdFromMaSinhVien(idSinhVien));
         jsonObject.addProperty("selectedDate", selectedDate);
 
         // Chuyển đối tượng JSON thành chuỗi
@@ -264,7 +263,7 @@ public class CalendarFragment extends Fragment {
                     List<MonHoc> monHocs = getMonHocFromFile(dataArray,tableContent);
 
                     if (!monHocs.isEmpty()) {
-                        callApiUpdateCalendar(monHocs, SinhVien.getIdFromMaSinhVien(maSinhVien.getContent()));
+                        callApiUpdateCalendar(monHocs, SinhVien.Companion.getIdFromMaSinhVien(maSinhVien.getContent()));
                     }
 
                 } catch (IOException e) {
