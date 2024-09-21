@@ -1,10 +1,10 @@
 package com.example.note.ApiService;
 
-import com.example.note.Data.model.ResponseAvatar;
-import com.example.note.Data.model.ResponseClass;
-import com.example.note.Data.model.ResponseNote;
-import com.example.note.Data.model.ResponseSchedule;
-import com.example.note.Data.model.ResponseStatus;
+import com.example.note.data.model.ResponseAvatar;
+import com.example.note.data.model.ResponseClass;
+import com.example.note.data.model.ResponseNote;
+import com.example.note.data.model.ResponseSchedule;
+import com.example.note.data.model.ResponseStatus;
 
 import java.util.Map;
 

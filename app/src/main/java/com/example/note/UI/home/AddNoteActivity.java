@@ -14,8 +14,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.example.note.Data.model.Note;
-import com.example.note.Data.model.SinhVien;
+import com.example.note.data.model.Note;
+import com.example.note.data.model.SinhVien;
 import com.example.note.R;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;

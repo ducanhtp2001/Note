@@ -17,8 +17,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.note.Data.model.SinhVien;
-import com.example.note.Data.model.TaiKhoan;
+import com.example.note.data.model.SinhVien;
+import com.example.note.data.model.TaiKhoan;
 import com.example.note.activities.login.LoginActivity;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

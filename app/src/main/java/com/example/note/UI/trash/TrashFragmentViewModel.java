@@ -7,8 +7,8 @@ import android.util.Log;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.note.Data.model.NoteInTrash;
-import com.example.note.Data.model.SinhVien;
+import com.example.note.data.model.NoteInTrash;
+import com.example.note.data.model.SinhVien;
 import com.example.note.Tools.SQLite.Connect;
 import com.example.note.Tools.SQLite.ConnectSharing;
 import com.example.note.Tools.SecutityTools.KeyStoreSystem_RSA;

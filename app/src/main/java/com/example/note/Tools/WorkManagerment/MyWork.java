@@ -13,9 +13,9 @@ import androidx.work.Worker;
 import androidx.work.WorkerParameters;
 
 import com.example.note.ApiService.ApiClient;
-import com.example.note.Data.model.ResponseSchedule;
-import com.example.note.Data.model.Schedule;
-import com.example.note.Data.model.SinhVien;
+import com.example.note.data.model.ResponseSchedule;
+import com.example.note.data.model.Schedule;
+import com.example.note.data.model.SinhVien;
 import com.example.note.R;
 
 import java.text.SimpleDateFormat;

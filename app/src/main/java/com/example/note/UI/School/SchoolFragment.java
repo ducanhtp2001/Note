@@ -15,10 +15,10 @@ import android.widget.Toast;
 
 import com.example.note.Adapter.ClassAdapter;
 import com.example.note.ApiService.ApiClient;
-import com.example.note.Data.UserData;
-import com.example.note.Data.model.Course;
-import com.example.note.Data.model.ResponseClass;
-import com.example.note.Data.model.SinhVien;
+import com.example.note.data.UserData;
+import com.example.note.data.model.Course;
+import com.example.note.data.model.ResponseClass;
+import com.example.note.data.model.SinhVien;
 import com.example.note.R;
 import com.example.note.databinding.FragmentSchoolBinding;
 

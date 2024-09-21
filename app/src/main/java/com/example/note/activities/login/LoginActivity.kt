@@ -43,14 +43,6 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(LayoutInflater.from(this))
         setContentView(binding.root)
 
-//        binding.createAccount = findViewById(R.id.createAccount)
-//        binding.loginBtn = findViewById(R.id.binding.loginBtn)
-//        binding.lIdStuden = findViewById(R.id.binding.lIdStuden)
-//        binding.lPassword = findViewById(R.id.binding.lPassword)
-//        binding.forgotPasword = findViewById(R.id.binding.forgotPasword)
-
-        
-
         binding.loginBtn.setOnClickListener(View.OnClickListener {
             if (TextUtils.isEmpty(binding.lIdStuden.getText().toString())) {
                 binding.lIdStuden.setError("Vui lòng nhập họ tên")
@@ -60,14 +52,6 @@ class LoginActivity : AppCompatActivity() {
                 binding.lPassword.setError("Vui lòng nhập Password")
                 return@OnClickListener
             }
-
-//            val spec: ConnectionSpec = Request.Builder(ConnectionSpec.MODERN_TLS)
-//                .tlsVersions(TlsVersion.TLS_1_2)
-//                .cipherSuites(
-//                    TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,
-//                    TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
-//                )
-//                .build()
 
             val logging = HttpLoggingInterceptor().apply {
                 level = HttpLoggingInterceptor.Level.BODY

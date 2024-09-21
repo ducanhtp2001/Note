@@ -20,8 +20,8 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.note.Adapter.NoteInTrashAdapter;
 import com.example.note.MainActivity;
-import com.example.note.Data.model.Note;
-import com.example.note.Data.model.NoteInTrash;
+import com.example.note.data.model.Note;
+import com.example.note.data.model.NoteInTrash;
 import com.example.note.R;
 import com.example.note.databinding.FragmentTrashBinding;
 import com.google.gson.Gson;

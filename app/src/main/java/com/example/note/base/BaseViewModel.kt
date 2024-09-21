@@ -2,8 +2,7 @@ package com.example.note.base
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.note.Data.repository.repo.CommonRepository
-import com.example.note.Data.useCase.CommonUseCase
+import com.example.note.data.useCase.CommonUseCase
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -19,13 +18,13 @@ abstract class BaseViewModel: ViewModel() {
     @Inject
     lateinit var useCase: CommonUseCase
 
-    private val _showLoading = MutableSharedFlow<Boolean>()
+    protected val _showLoading = MutableSharedFlow<Boolean>()
     val showLoading: SharedFlow<Boolean> = _showLoading
 
-    private val _toastMessage = MutableSharedFlow<String>()
+    protected val _toastMessage = MutableSharedFlow<String>()
     val toastMessage: SharedFlow<String> = _toastMessage
 
-    private val _toastRes = MutableSharedFlow<Int>()
+    protected val _toastRes = MutableSharedFlow<Int>()
     val toastRes: SharedFlow<Int> = _toastRes
 
     protected suspend fun showToast(message: String) {

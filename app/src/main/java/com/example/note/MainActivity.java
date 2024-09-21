@@ -18,7 +18,7 @@
     import androidx.work.OneTimeWorkRequest;
     import androidx.work.WorkManager;
 
-    import com.example.note.Data.UserData;
+    import com.example.note.data.UserData;
     import com.example.note.Tools.WorkManagerment.MyWork;
     import com.example.note.activities.login.LoginActivity;
     import com.example.note.databinding.ActivityMainBinding;

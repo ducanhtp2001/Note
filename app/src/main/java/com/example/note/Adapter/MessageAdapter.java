@@ -14,9 +14,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.example.note.Data.UserData;
-import com.example.note.Data.model.Message;
-import com.example.note.Data.model.SinhVien;
+import com.example.note.data.UserData;
+import com.example.note.data.model.Message;
+import com.example.note.data.model.SinhVien;
 import com.example.note.R;
 import com.example.note.Tools.AnotherTools.ConvertImg;
 

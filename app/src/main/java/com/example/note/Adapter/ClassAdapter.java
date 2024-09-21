@@ -10,7 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.example.note.Data.model.Course;
+import com.example.note.data.model.Course;
 import com.example.note.R;
 
 import java.util.List;

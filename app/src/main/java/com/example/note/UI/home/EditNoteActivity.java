@@ -13,9 +13,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.note.Data.UserData;
-import com.example.note.Data.model.Note;
-import com.example.note.Data.model.SinhVien;
+import com.example.note.data.UserData;
+import com.example.note.data.model.Note;
+import com.example.note.data.model.SinhVien;
 import com.example.note.R;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;

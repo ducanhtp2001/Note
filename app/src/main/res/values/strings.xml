@@ -34,6 +34,13 @@
     <string name="dialog_language">English</string>
     <string name="note_belong">Private Note</string>
 
+    <string name="err_input_student_id_first">Input student id first</string>
+    <string name="err_student_id_not_found">Student id not found</string>
+    <string name="err_password_not_match">Password not match</string>
+    <string name="err_password_invalid">Password invalid</string>
+
+    <string name="common_err">Error</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string-array name="sort_options">
