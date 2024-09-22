@@ -1,4 +1,4 @@
-package com.example.note.UI.home;
+package com.example.note.UI.home.add_note;
 
 import android.content.Intent;
 import android.content.res.Configuration;

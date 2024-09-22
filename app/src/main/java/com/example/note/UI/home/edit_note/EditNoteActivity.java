@@ -1,4 +1,4 @@
-package com.example.note.UI.home;
+package com.example.note.UI.home.edit_note;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;

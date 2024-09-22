@@ -2,12 +2,14 @@ package com.example.note.data
 
 import android.annotation.SuppressLint
 import com.example.note.data.model.Course
+import com.example.note.data.model.Note
 import com.example.note.data.model.SinhVien
 
 class AppState {
 
     private var sinhVien: SinhVien = SinhVien()
     private var course: Course = Course()
+    private var selectedNote: Note? = null
 
 
     @SuppressLint("StaticFieldLeak")
@@ -34,9 +36,15 @@ class AppState {
         this.course = course;
     }
 
-    fun getCourse(): Course? {
+    fun getCourse(): Course {
         return course;
     }
 
+    fun getSelectedNote(): Note? {
+        return selectedNote
+    }
 
+    fun setSelectedNote(selectedNote: Note) {
+        this.selectedNote = selectedNote
+    }
 }

@@ -14,7 +14,7 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.example.note.UI.home.HomeFragment"
+        android:name="com.example.note.UI.home.home.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
 
@@ -32,7 +32,7 @@
 
     <fragment
         android:id="@+id/home"
-        android:name="com.example.note.UI.home.HomeFragment"
+        android:name="com.example.note.UI.home.home.HomeFragment"
         android:label="@string/bottom_home"
         tools:layout="@layout/fragment_home" />
 

@@ -24,7 +24,7 @@
             android:name=".UI.School.ShowClassActivity"
             android:exported="false" />
         <activity
-            android:name=".UI.home.EditNoteActivity"
+            android:name=".UI.home.edit_note.EditNoteActivity"
             android:theme="@style/AppTheme.EditNoteActivity">
 
             <!-- Other activity attributes -->
@@ -50,7 +50,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".UI.home.AddNoteActivity"
+            android:name=".UI.home.add_note.AddNoteActivity"
             android:configChanges="orientation|keyboardHidden|screenSize|locale"
             android:theme="@style/Theme.Note.NoActionBar" />
 
