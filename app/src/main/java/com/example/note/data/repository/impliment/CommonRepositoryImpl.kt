@@ -4,6 +4,10 @@ import com.example.note.data.api_service.CommonApiService
 import com.example.note.data.repository.repo.CommonRepository
 import com.example.note.data.response.CheckRegisterResponse
 import com.example.note.Tools.model_hepler.ModelHelper
+import com.example.note.data.AppState
+import com.example.note.data.model.ResponseClass
+import com.example.note.data.model.ResponseNote
+import com.example.note.data.model.ResponseSchedule
 import com.example.note.data.model.TaiKhoan
 import com.example.note.data.response.BaseResponse
 import com.example.note.data.response.LoginResponse
@@ -50,4 +54,61 @@ class CommonRepositoryImpl(
             throw exception
         }
     }
+
+    override suspend fun getNote(): Flow<ResponseNote?> = flow {
+        try {
+            val id = AppState.getInstance().getSinhVien().id
+            val body = ModelHelper.buildIDRequestBody(id)
+            val result = apiService.getNote(body)
+            emit(result)
+        } catch (exception: Exception) {
+            emit(null)
+            throw exception
+        }
+    }
+
+    override suspend fun deleteNote(id: Int): Flow<BaseResponse?> = flow {
+        try {
+            val idSinhVien = AppState.getInstance().getSinhVien().idStr
+            val body = ModelHelper.buildDeleteNoteRequestBody(idSinhVien, id)
+            val result = apiService.deleteNote(body)
+            emit(result)
+        } catch (exception: Exception) {
+            emit(null)
+            throw exception
+        }
+    }
+
+    override suspend fun getClassById(): Flow<ResponseClass?> = flow {
+        try {
+            val id = AppState.getInstance().getSinhVien().id
+            val body = ModelHelper.buildIDRequestBody(id)
+            val result = apiService.getClassById(body)
+            emit(result)
+        } catch (exception: Exception) {
+            emit(null)
+            throw exception
+        }
+    }
+
+    override suspend fun getSchedules(): Flow<ResponseSchedule?> = flow {
+        try {
+            val id = AppState.getInstance().getSinhVien().id
+            val body = ModelHelper.buildIDRequestBody(id)
+            val result = apiService.getSchedules(body)
+            emit(result)
+        } catch (exception: Exception) {
+            emit(null)
+            throw exception
+        }
+    }
+
+//    override suspend fun getAvatarUrl(idSinhVien: String): Flow<ResponseAvatar?> {
+//
+//    }
+//
+//    override suspend fun setAvatarUrl(idSinhVien: String, avatarUrl: String): Flow<BaseResponse?> {
+//
+//    }
+
 }

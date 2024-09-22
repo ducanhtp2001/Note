@@ -146,67 +146,67 @@ public class TrashFragment extends Fragment {
     private void callApi(NoteInTrash selectedNote) {
 
 
-        Note note = new Note(selectedNote.getIdSinhVien(),
-                selectedNote.getTieuDe(),
-                Note.getNgayStr(selectedNote.getNgayTao()),
-                Note.getNgayStr(selectedNote.getNgayCapNhat()),
-                selectedNote.getNoiDung(),
-                selectedNote.getNoiDungCua());
-
-        OkHttpClient client = new OkHttpClient();
-        MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
-        JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("id", note.getId());
-        jsonObject.addProperty("tieuDe", note.getTieuDe());
-        jsonObject.addProperty("ngayTao", Note.getNgayStr(note.getNgayTao()));
-        jsonObject.addProperty("ngayCapNhat", Note.getNgayStr(note.getNgayCapNhat()));
-        jsonObject.addProperty("noiDung", note.getNoiDung().toString());
-        jsonObject.addProperty("noiDungCua", note.getNoiDungCua().toString());
-
-        // Chuyển đối tượng JSON thành chuỗi
-        String json = jsonObject.toString();
-        Log.e("TAG", "saveNote: " + json);
-        Request request = new Request.Builder()
-                .url("https://ttcs-test.000webhostapp.com/androidApi/insertNote.php")
-                .post(RequestBody.create(mediaType, json))
-                .build();
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                Log.e("Error", "Error");
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                String json = response.body().string();
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Gson gson = new Gson();
-                        JsonElement jsonElement = gson.fromJson(json, JsonElement.class);
-                        JsonObject jsonObject = jsonElement.getAsJsonObject();
-                        String message = "";
-                        boolean status = false;
-                        if (jsonObject.has("message")) {
-                            message = jsonObject.get("message").getAsString();
-
-                        }
-                        if (jsonObject.has("status")) {
-                            status = jsonObject.get("status").getAsBoolean();
-                        }
-//                                    Toast.makeText(RegisterActivity.this, tenSinhVien + status, Toast.LENGTH_SHORT).show();
-                        if(status) {
-                            Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
-                            model.deleteNote(selectedNote.getId());
-                            model.setNoteListLiveData();
-                            noteAdapter.notifyDataSetChanged();
-                        } else {
-                            Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-            }
-        });
+//        Note note = new Note(selectedNote.getIdSinhVien(),
+//                selectedNote.getTieuDe(),
+//                Note.getNgayStr(selectedNote.getNgayTao()),
+//                Note.getNgayStr(selectedNote.getNgayCapNhat()),
+//                selectedNote.getNoiDung(),
+//                selectedNote.getNoiDungCua());
+//
+//        OkHttpClient client = new OkHttpClient();
+//        MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
+//        JsonObject jsonObject = new JsonObject();
+//        jsonObject.addProperty("id", note.id);
+//        jsonObject.addProperty("tieuDe", note.tieuDe);
+//        jsonObject.addProperty("ngayTao", Note.getNgayStr(note.ngayTao));
+//        jsonObject.addProperty("ngayCapNhat", Note.getNgayStr(note.ngayCapNhat));
+//        jsonObject.addProperty("noiDung", note.noiDung.toString());
+//        jsonObject.addProperty("noiDungCua", note.noiDungCua.toString());
+//
+//        // Chuyển đối tượng JSON thành chuỗi
+//        String json = jsonObject.toString();
+//        Log.e("TAG", "saveNote: " + json);
+//        Request request = new Request.Builder()
+//                .url("https://ttcs-test.000webhostapp.com/androidApi/insertNote.php")
+//                .post(RequestBody.create(mediaType, json))
+//                .build();
+//        client.newCall(request).enqueue(new Callback() {
+//            @Override
+//            public void onFailure(Call call, IOException e) {
+//                Log.e("Error", "Error");
+//            }
+//
+//            @Override
+//            public void onResponse(Call call, Response response) throws IOException {
+//                String json = response.body().string();
+//                getActivity().runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        Gson gson = new Gson();
+//                        JsonElement jsonElement = gson.fromJson(json, JsonElement.class);
+//                        JsonObject jsonObject = jsonElement.getAsJsonObject();
+//                        String message = "";
+//                        boolean status = false;
+//                        if (jsonObject.has("message")) {
+//                            message = jsonObject.get("message").getAsString();
+//
+//                        }
+//                        if (jsonObject.has("status")) {
+//                            status = jsonObject.get("status").getAsBoolean();
+//                        }
+////                                    Toast.makeText(RegisterActivity.this, tenSinhVien + status, Toast.LENGTH_SHORT).show();
+//                        if(status) {
+//                            Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+//                            model.deleteNote(selectedNote.getId());
+//                            model.setNoteListLiveData();
+//                            noteAdapter.notifyDataSetChanged();
+//                        } else {
+//                            Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+//                        }
+//                    }
+//                });
+//            }
+//        });
     }
 
     @Override

@@ -72,24 +72,24 @@ public class SchoolFragment extends Fragment {
     }
 
     private void callApi() {
-        int idSinhVien = SinhVien.Companion.getIdFromMaSinhVien(this.idSinhVienStr);
-        Map<String, Integer> idMap = new HashMap<>();
-        idMap.put("id", idSinhVien);
-        ApiClient.getApiService().getClassById(idMap).enqueue(new Callback<ResponseClass>() {
-            @Override
-            public void onResponse(Call<ResponseClass> call, Response<ResponseClass> response) {
-                Log.e("TAG", "onResponse: " + response.body().toString());
-                ResponseClass res = response.body();
-                boolean status = res.isStatus();
-                courses.clear();
-                courses.addAll(res.getCourses());
-                classAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onFailure(Call<ResponseClass> call, Throwable t) {
-                Toast.makeText(getActivity(), "False", Toast.LENGTH_SHORT).show();
-            }
-        });
+//        int idSinhVien = SinhVien.Companion.getIdFromMaSinhVien(this.idSinhVienStr);
+//        Map<String, Integer> idMap = new HashMap<>();
+//        idMap.put("id", idSinhVien);
+//        ApiClient.getApiService().getClassById(idMap).enqueue(new Callback<ResponseClass>() {
+//            @Override
+//            public void onResponse(Call<ResponseClass> call, Response<ResponseClass> response) {
+//                Log.e("TAG", "onResponse: " + response.body().toString());
+//                ResponseClass res = response.body();
+//                boolean status = res.isStatus();
+//                courses.clear();
+//                courses.addAll(res.courses);
+//                classAdapter.notifyDataSetChanged();
+//            }
+//
+//            @Override
+//            public void onFailure(Call<ResponseClass> call, Throwable t) {
+//                Toast.makeText(getActivity(), "False", Toast.LENGTH_SHORT).show();
+//            }
+//        });
     }
 }

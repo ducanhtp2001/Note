@@ -7,4 +7,5 @@ interface BaseFragmentBehavior {
     fun setupView() {}
     fun bindViewEvents() {}
     fun bindViewModel() {}
+    fun viewDidLoad() {}
 }

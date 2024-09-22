@@ -188,27 +188,27 @@ public class AccountFragment extends Fragment {
     }
 
     private void callGetAvatarApi() {
-        Map idMap = new HashMap();
-        idMap.put("id", SinhVien.Companion.getIdFromMaSinhVien(idSinhVien));
-
-        ApiClient.getApiService().getAvatarUrl(idMap).enqueue(new retrofit2.Callback<ResponseAvatar>() {
-            @Override
-            public void onResponse(retrofit2.Call<ResponseAvatar> call, retrofit2.Response<ResponseAvatar> response) {
-                Log.e("TAG", "onResponse: " + response.body().toString());
-                ResponseAvatar res = response.body();
-                boolean status = res.isStatus();
-                Log.e("url", res.getAvatar().getAvatar());
-                Glide.with(getActivity())
-                        .load(res.getAvatar().getAvatar())
-                        .override(120, 160)
-                        .into(imgAvatar);
-            }
-
-            @Override
-            public void onFailure(retrofit2.Call<ResponseAvatar> call, Throwable t) {
-                Log.e("TAG", "getActivity err");
-            }
-        });
+//        Map idMap = new HashMap();
+//        idMap.put("id", SinhVien.Companion.getIdFromMaSinhVien(idSinhVien));
+//
+//        ApiClient.getApiService().getAvatarUrl(idMap).enqueue(new retrofit2.Callback<ResponseAvatar>() {
+//            @Override
+//            public void onResponse(retrofit2.Call<ResponseAvatar> call, retrofit2.Response<ResponseAvatar> response) {
+//                Log.e("TAG", "onResponse: " + response.body().toString());
+//                ResponseAvatar res = response.body();
+//                boolean status = res.isStatus();
+//                Log.e("url", res.avatar.avatar);
+//                Glide.with(getActivity())
+//                        .load(res.avatar.avatar)
+//                        .override(120, 160)
+//                        .into(imgAvatar);
+//            }
+//
+//            @Override
+//            public void onFailure(retrofit2.Call<ResponseAvatar> call, Throwable t) {
+//                Log.e("TAG", "getActivity err");
+//            }
+//        });
     }
 
     private void callApi() {

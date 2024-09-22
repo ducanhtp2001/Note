@@ -6,8 +6,8 @@ import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
 import android.os.Build
-import android.os.Bundle
-import android.util.Log
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.ContextMenu
 import android.view.ContextMenu.ContextMenuInfo
 import android.view.LayoutInflater
@@ -16,61 +16,45 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import android.widget.AdapterView.AdapterContextMenuInfo
-import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation.findNavController
 import com.example.note.Adapter.NoteAdapter
-import com.example.note.ApiService.ApiClient
 import com.example.note.R
+import com.example.note.Tools.AnotherTools.guard
 import com.example.note.Tools.SQLite.Connect
 import com.example.note.Tools.SQLite.ConnectSharing
 import com.example.note.Tools.SecutityTools.KeyStoreSystem_RSA
+import com.example.note.Tools.log_helper.LogHelper
 import com.example.note.UI.Calendar.CalendarFragment
 import com.example.note.UI.School.SchoolFragment
 import com.example.note.UI.home.add_note.AddNoteActivity
 import com.example.note.UI.home.edit_note.EditNoteActivity
 import com.example.note.UI.settings.SettingsFragment
 import com.example.note.base.BaseFragment
+import com.example.note.base.provideViewModels
 import com.example.note.data.AppState
 import com.example.note.data.model.Note
-import com.example.note.data.model.ResponseNote
 import com.example.note.data.model.SinhVien.Companion.getIdFromMaSinhVien
 import com.example.note.databinding.FragmentHomeBinding
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.gson.Gson
-import com.google.gson.JsonElement
-import com.google.gson.JsonObject
-import okhttp3.MediaType
-import okhttp3.OkHttpClient
-import okhttp3.Request
-import okhttp3.Request.Builder.build
-import okhttp3.Request.Builder.post
-import okhttp3.Request.Builder.url
-import okhttp3.RequestBody
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import java.io.IOException
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>(), NoteAdapter.NoteAdapterListener {
 
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentHomeBinding = {
         inflater, container, attachToParent -> FragmentHomeBinding.inflate(inflater, container, attachToParent)
     }
 
+    private val viewModel: HomeFragmentViewModel by provideViewModels()
+
     private var belong: String = ""
 
     private val RESULT_CODE_ADDNOTE = 1
     private val RESULT_CODE_EDITNOTE = 2
 
-    private var notes: MutableList<Note> = mutableListOf()
-    private var notesToSearch: MutableList<Note> = mutableListOf()
-
-    private var noteAdapter = NoteAdapter()
+    private var adapter = NoteAdapter()
 
     private var idSinhVienstr: String? = null
 
@@ -87,10 +71,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), NoteAdapter.NoteAdapte
         setHasOptionsMenu(true)
         hideSearch()
 
-        binding.listView.setAdapter(noteAdapter)
+        binding.listView.setAdapter(adapter)
+        adapter.setListener(this)
         registerForContextMenu(binding.listView)
-
-
     }
 
     override fun bindViewEvents() {
@@ -100,9 +83,18 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), NoteAdapter.NoteAdapte
         }
 
         binding.btnExit.setOnClickListener {
-            callApi()
             hideSearch()
         }
+
+        binding.txtSearch.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) { }
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+            override fun afterTextChanged(s: Editable?) {
+                viewModel.keyWord = s?.toString() ?: ""
+            }
+
+        })
 
         binding.bottomNavigationView.setOnNavigationItemSelectedListener { item ->
             val id = item.itemId
@@ -120,7 +112,30 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), NoteAdapter.NoteAdapte
     }
 
     override fun bindViewModel() {
+        viewModel.displayNotes.bindTo {
+            LogHelper.logDebug("submit list: $it")
+            adapter.submitList(it)
+        }
 
+        viewModel.deleteResponse.bindTo { status ->
+            val idSinhVien = getIdFromMaSinhVien(idSinhVienstr ?: "")
+            val selectedNote = AppState.getInstance().getSelectedNote().guard { return@bindTo }
+
+            val query = "INSERT INTO note VALUES (null, " + idSinhVien +
+                    ", '" + KeyStoreSystem_RSA.encryptData(selectedNote.tieuDe) +
+                    "', '" + KeyStoreSystem_RSA.encryptData(Note.getNgayStr(selectedNote.ngayTaoDate)) +
+                    "', '" + KeyStoreSystem_RSA.encryptData(Note.getNgayStr(selectedNote.ngayCapNhatDate)) +
+                    "', '" + KeyStoreSystem_RSA.encryptData(selectedNote.noiDung) +
+                    "', '" + KeyStoreSystem_RSA.encryptData(selectedNote.noiDungCua) + "')"
+
+            connect?.nonReturnQuery(query)
+            val msg = if (status) getString(R.string.delete_success) else getString(R.string.delete_false)
+            toaster.display(msg)
+        }
+    }
+
+    override fun viewDidLoad() {
+        viewModel.getNotes()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -134,37 +149,17 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), NoteAdapter.NoteAdapte
             showSearch()
             return true
         } else if (id == R.id.action_sort_by_create) {
-            sortByCreate()
+            viewModel.sortByCreate()
             return true
         } else if (id == R.id.action_sort_by_modify) {
-            shortByModify()
+            viewModel.shortByModify()
             return true
         }
         return super.onOptionsItemSelected(item)
     }
 
 
-    private fun shortByModify() {
-        Toast.makeText(activity, "Sort by modify time", Toast.LENGTH_SHORT).show()
-        notes.sortWith{ note1, note2 ->
-            java.lang.Long.compare(
-                note1.ngayCapNhat.time,
-                note2.ngayCapNhat.time
-            )
-        }
-        noteAdapter?.notifyDataSetChanged()
-    }
 
-    private fun sortByCreate() {
-        Toast.makeText(activity, "Sort by create time", Toast.LENGTH_SHORT).show()
-        notes.sortWith{ note1, note2 ->
-            java.lang.Long.compare(
-                note1.ngayTao.time,
-                note2.ngayTao.time
-            )
-        }
-        noteAdapter?.notifyDataSetChanged()
-    }
 
     private fun hideSearch() {
         binding.layoutSearch.visibility = View.GONE
@@ -172,29 +167,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), NoteAdapter.NoteAdapte
 
     private fun showSearch() {
         binding.layoutSearch.visibility = View.VISIBLE
-    }
-
-    private fun callApi() {
-//        listView.setAdapter(noteAdapter);
-        val idSinhVien = getIdFromMaSinhVien(idSinhVienstr!!)
-        val idMap: MutableMap<String, Int> = HashMap()
-        idMap["id"] = idSinhVien
-        ApiClient.getApiService().getNoteById(idMap).enqueue(object : Callback<ResponseNote> {
-            override fun onResponse(call: Call<ResponseNote>, response: Response<ResponseNote>) {
-                Log.e("TAG", "onResponse: " + response.body().toString())
-                val res = response.body()
-                val status = res!!.isStatus
-                notes!!.clear()
-                if (res.notes != null) {
-                    notes!!.addAll(res.notes)
-                }
-                noteAdapter!!.notifyDataSetChanged()
-            }
-
-            override fun onFailure(call: Call<ResponseNote>, t: Throwable) {
-                Toast.makeText(activity, "Load err", Toast.LENGTH_SHORT).show()
-            }
-        })
     }
 
     private fun replaceFragment(fragment: Fragment) {
@@ -225,7 +197,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), NoteAdapter.NoteAdapte
 
         if (requestCode == RESULT_CODE_ADDNOTE) {
             if (resultCode == Activity.RESULT_OK) {
-                callApi()
+                viewModel.getNotes()
             } else if (resultCode == Activity.RESULT_CANCELED) {
             }
         }
@@ -235,24 +207,24 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), NoteAdapter.NoteAdapte
         super.onCreateContextMenu(menu, v, menuInfo)
 
         val info = menuInfo as AdapterContextMenuInfo?
-        noteAdapter.currentList[info!!.position]?.let {
+        adapter.currentList[info!!.position]?.let {
             requireActivity().menuInflater.inflate(R.menu.note_menu, menu)
         }
     }
 
     override fun onContextItemSelected(item: MenuItem): Boolean {
         val info = item.menuInfo as? AdapterContextMenuInfo
-        val position = info?.position
-        val selectedNote = noteAdapter.currentList.getOrNull(position)
+        val position = info?.position.guard { return super.onContextItemSelected(item) }
+        val selectedNote = adapter.currentList.getOrNull(position)
 
         if (selectedNote != null) {
             val itemId = item.itemId
             if (itemId == R.id.action_pin) {
-                val noteTitle = selectedNote.tieuDe
+                val noteTitle = selectedNote.tieuDe ?: ""
                 showPinNotification(noteTitle)
                 return true
             } else if (itemId == R.id.action_del) {
-                callDeleteApi(selectedNote)
+                deleteNote(selectedNote)
                 return true
             }
         }
@@ -260,54 +232,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), NoteAdapter.NoteAdapte
         return super.onContextItemSelected(item)
     }
 
-    private fun callDeleteApi(selectedNote: Note) {
+    private fun deleteNote(selectedNote: Note) {
         val idSinhVien = getIdFromMaSinhVien(idSinhVienstr!!)
-        val id = selectedNote.id
-
-        val query = "INSERT INTO note VALUES (null, " + idSinhVien +
-                ", '" + KeyStoreSystem_RSA.encryptData(selectedNote.tieuDe) +
-                "', '" + KeyStoreSystem_RSA.encryptData(Note.getNgayStr(selectedNote.ngayTao)) +
-                "', '" + KeyStoreSystem_RSA.encryptData(Note.getNgayStr(selectedNote.ngayCapNhat)) +
-                "', '" + KeyStoreSystem_RSA.encryptData(selectedNote.noiDung) +
-                "', '" + KeyStoreSystem_RSA.encryptData(selectedNote.noiDungCua) + "')"
-
-        val client = OkHttpClient()
-        val mediaType: MediaType = parse.parse("application/json; charset=utf-8")
-        val jsonObject = JsonObject()
-        jsonObject.addProperty("idSinhVien", idSinhVien)
-        jsonObject.addProperty("id", id)
-
-        val json = jsonObject.toString()
-        Log.e("TAG", "saveNote: $json")
-        val request: Request = Builder()
-            .url("https://ttcs-test.000webhostapp.com/androidApi/deleteNote.php")
-            .post(RequestBody.create(mediaType, json))
-            .build()
-        client.newCall(request).enqueue(object : okhttp3.Callback {
-            override fun onFailure(call: okhttp3.Call, e: IOException) {
-                Toast.makeText(activity, "False", Toast.LENGTH_SHORT).show()
-            }
-
-            @Throws(IOException::class)
-            override fun onResponse(call: okhttp3.Call, response: okhttp3.Response) {
-                val json = response.body()!!.string()
-
-                activity!!.runOnUiThread {
-                    val gson = Gson()
-                    val jsonElement = gson.fromJson(json, JsonElement::class.java)
-                    val jsonObject = jsonElement.asJsonObject
-                    val status = jsonObject["status"].asBoolean
-                    val message = jsonObject["message"].asString
-                    if (status) {
-                        Toast.makeText(activity, message, Toast.LENGTH_SHORT).show()
-                        connect!!.nonReturnQuery(query)
-                        callApi()
-                    } else {
-                        Toast.makeText(activity, message, Toast.LENGTH_SHORT).show()
-                    }
-                }
-            }
-        })
+        AppState.getInstance().setSelectedNote(selectedNote)
+        selectedNote.id?.let {
+            viewModel.deleteNote(it)
+        }
     }
 
     private fun initConnectSharing() {

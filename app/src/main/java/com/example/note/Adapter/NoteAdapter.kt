@@ -28,7 +28,9 @@ class NoteAdapter : ListAdapter<Note, NoteAdapter.ViewHolder>(NoteDiff()){
 
         fun bindItem(note: Note) {
             binding.noteTitle.text = note.tieuDe
-            binding.editTime.text = DateTimeHepler.NORMAL_SDF.format(note.ngayCapNhat)
+            try {
+                binding.editTime.text = DateTimeHepler.RESPONSE_SDF.format(note.ngayCapNhat)
+            } catch (_: Exception) {}
             binding.noteBelong.text = note.noiDungCua
 
             binding.root.setOnClickListener {

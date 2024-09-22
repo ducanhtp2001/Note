@@ -1,5 +1,8 @@
 package com.example.note.data.repository.repo
 
+import com.example.note.data.model.ResponseClass
+import com.example.note.data.model.ResponseNote
+import com.example.note.data.model.ResponseSchedule
 import com.example.note.data.model.TaiKhoan
 import com.example.note.data.response.BaseResponse
 import com.example.note.data.response.CheckRegisterResponse
@@ -10,4 +13,12 @@ interface CommonRepository {
     suspend fun checkRegister(idSinhVien: String): Flow<CheckRegisterResponse?>
     suspend fun register(taiKhoan: TaiKhoan): Flow<BaseResponse?>
     suspend fun login(account: String, password: String): Flow<LoginResponse?>
+
+    suspend fun getNote(): Flow<ResponseNote?>
+    suspend fun deleteNote(id: Int): Flow<BaseResponse?>
+    suspend fun getClassById(): Flow<ResponseClass?>
+    suspend fun getSchedules(): Flow<ResponseSchedule?>
+//    suspend fun getAvatarUrl(idSinhVien: String): Flow<ResponseAvatar?>
+//    suspend fun setAvatarUrl(idSinhVien: String, avatarUrl: String): Flow<BaseResponse?>
+
 }

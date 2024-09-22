@@ -46,48 +46,48 @@ public class MyWork extends Worker {
     }
 
     private void callApi(String idSinhVien) {
-        Map id = new HashMap();
-        id.put("id", SinhVien.Companion.getIdFromMaSinhVien(idSinhVien));
-        ApiClient.getApiService().getSchedules(id).enqueue(new Callback<ResponseSchedule>() {
-            @Override
-            public void onResponse(Call<ResponseSchedule> call, Response<ResponseSchedule> response) {
-                Log.e("TAG", "onResponse: " + response.body().toString());
-                ResponseSchedule res = response.body();
-                Log.e("TAG", "body: " + res.getSchedules().get(0));
-                boolean status = res.getStatus();
-                List<Schedule> schedules = res.getSchedules();
-                Calendar calendar = Calendar.getInstance();
-                Date date = calendar.getTime();
-                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                String now = dateFormat.format(date);
-                if(schedules != null && !schedules.isEmpty()) {
-                    for (int i = 0; i < schedules.size(); i++) {
-                        Date scheDate = schedules.get(i).getNgayHoc();
-                        String scheDateStr = dateFormat.format(scheDate);
-                        Log.e("TAG", scheDateStr);
-
-                        if (now.equals(scheDateStr)) {
-                            Log.d("tag", "equal");
-                            showPinNotification(schedules.get(i).getTenMon() + ". Ca học: " + schedules.get(i).getCaHoc());
-                        } else Log.d("tag", "not equal");
-
-//                        if(date.before(scheDate)) {
-//                            Log.d("tag", "bef");
-//                        } else if (date.after(schedules.get(i).getNgayHoc())) {
-//                            Log.d("tag", "aft");
-//                        } else {
+//        Map id = new HashMap();
+//        id.put("id", SinhVien.Companion.getIdFromMaSinhVien(idSinhVien));
+//        ApiClient.getApiService().getSchedules(id).enqueue(new Callback<ResponseSchedule>() {
+//            @Override
+//            public void onResponse(Call<ResponseSchedule> call, Response<ResponseSchedule> response) {
+//                Log.e("TAG", "onResponse: " + response.body().toString());
+//                ResponseSchedule res = response.body();
+//                Log.e("TAG", "body: " + res.getSchedules().get(0));
+//                boolean status = res.status;
+//                List<Schedule> schedules = res.schedules;
+//                Calendar calendar = Calendar.getInstance();
+//                Date date = calendar.getTime();
+//                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//                String now = dateFormat.format(date);
+//                if(schedules != null && !schedules.isEmpty()) {
+//                    for (int i = 0; i < schedules.size(); i++) {
+//                        Date scheDate = schedules.get(i).getNgayHoc();
+//                        String scheDateStr = dateFormat.format(scheDate);
+//                        Log.e("TAG", scheDateStr);
+//
+//                        if (now.equals(scheDateStr)) {
 //                            Log.d("tag", "equal");
 //                            showPinNotification(schedules.get(i).getTenMon() + ". Ca học: " + schedules.get(i).getCaHoc());
-//                        }
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call call, Throwable t) {
-
-            }
-        });
+//                        } else Log.d("tag", "not equal");
+//
+////                        if(date.before(scheDate)) {
+////                            Log.d("tag", "bef");
+////                        } else if (date.after(schedules.get(i).getNgayHoc())) {
+////                            Log.d("tag", "aft");
+////                        } else {
+////                            Log.d("tag", "equal");
+////                            showPinNotification(schedules.get(i).getTenMon() + ". Ca học: " + schedules.get(i).getCaHoc());
+////                        }
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call call, Throwable t) {
+//
+//            }
+//        });
     }
 
     private void showPinNotification(String title) {

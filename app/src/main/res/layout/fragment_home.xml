@@ -47,12 +47,14 @@
                 app:startIconDrawable="@drawable/magnifying">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/txtAccount"
+                    android:id="@+id/txtSearch"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:completionThreshold="1"
                     android:fontFamily="@font/adamina"
                     android:inputType="text"
+                    android:imeOptions="actionDone"
+                    android:maxLines="1"
                     android:hint="@string/input_to_search"
                     android:textSize="18sp" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -63,6 +65,7 @@
             android:id="@+id/listView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/note_layout"/>
 
     </LinearLayout>
@@ -84,9 +87,7 @@
             android:id="@+id/bottomNavigationView"
             android:layout_marginRight="16dp"
             app:menu="@menu/bottom_nav_menu"
-            android:background="@drawable/transparent_background"
-
-            />
+            android:background="@drawable/transparent_background"/>
     </com.google.android.material.bottomappbar.BottomAppBar>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

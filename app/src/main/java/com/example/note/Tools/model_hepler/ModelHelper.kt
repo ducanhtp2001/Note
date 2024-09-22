@@ -29,6 +29,21 @@ class ModelHelper {
             return RequestBody.create(mediaType, json)
         }
 
+        fun buildIDRequestBody(id: Int): RequestBody {
+            val map = mapOf(
+                "id" to id.toString()
+            )
+            return buildRequestBody(map)
+        }
+
+        fun buildDeleteNoteRequestBody(idSinhVien: String, id: Int): RequestBody {
+            val map = mapOf(
+                "idSinhVien" to idSinhVien,
+                "id" to id.toString()
+            )
+            return buildRequestBody(map)
+        }
+
         fun buildLoginRequestBody(account: String, password: String): RequestBody {
             val map = mapOf(
                 "idSinhVien" to account,

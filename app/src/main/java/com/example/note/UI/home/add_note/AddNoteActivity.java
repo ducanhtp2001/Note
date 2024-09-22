@@ -94,67 +94,67 @@ public class AddNoteActivity extends AppCompatActivity {
     }
 
     private void saveNote() {
-        String title = editTextTitle.getText().toString();
-        String content = editTextContent.getText().toString();
-        String lastTimeEdited = getCurrentTime();
-
-        note = new Note(SinhVien.Companion.getIdFromMaSinhVien(idSinhVienstr), title, lastTimeEdited, lastTimeEdited, content, belong);
-
-        OkHttpClient client = new OkHttpClient();
-        MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
-        JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("id", note.getId());
-        jsonObject.addProperty("tieuDe", note.getTieuDe());
-        jsonObject.addProperty("ngayTao", Note.getNgayStr(note.getNgayTao()));
-        jsonObject.addProperty("ngayCapNhat", Note.getNgayStr(note.getNgayCapNhat()));
-        jsonObject.addProperty("noiDung", note.getNoiDung().toString());
-        jsonObject.addProperty("noiDungCua", belong);
-
-        // Chuyển đối tượng JSON thành chuỗi
-        String json = jsonObject.toString();
-        Log.e("TAG", "saveNote: " + json);
-        Request request = new Request.Builder()
-                .url("https://ttcs-test.000webhostapp.com/androidApi/insertNote.php")
-                .post(RequestBody.create(mediaType, json))
-                .build();
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                Log.e("Error", "Error");
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                String json = response.body().string();
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Gson gson = new Gson();
-                        JsonElement jsonElement = gson.fromJson(json, JsonElement.class);
-                        JsonObject jsonObject = jsonElement.getAsJsonObject();
-                        String message = "";
-                        boolean status = false;
-                        if (jsonObject.has("message")) {
-                            message = jsonObject.get("message").getAsString();
-
-                        }
-                        if (jsonObject.has("status")) {
-                            status = jsonObject.get("status").getAsBoolean();
-                        }
-//                                    Toast.makeText(RegisterActivity.this, tenSinhVien + status, Toast.LENGTH_SHORT).show();
-                        if(status) {
-                            Toast.makeText(AddNoteActivity.this, message, Toast.LENGTH_SHORT).show();
-                            Intent intent = getIntent();
-                            setResult(RESULT_OK);
-                            finish();
-                        } else {
-                            Toast.makeText(AddNoteActivity.this, message, Toast.LENGTH_SHORT).show();
-                            finish();
-                        }
-                    }
-                });
-            }
-        });
+//        String title = editTextTitle.getText().toString();
+//        String content = editTextContent.getText().toString();
+//        String lastTimeEdited = getCurrentTime();
+//
+//        note = new Note(SinhVien.Companion.getIdFromMaSinhVien(idSinhVienstr), title, lastTimeEdited, lastTimeEdited, content, belong);
+//
+//        OkHttpClient client = new OkHttpClient();
+//        MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
+//        JsonObject jsonObject = new JsonObject();
+//        jsonObject.addProperty("id", note.id);
+//        jsonObject.addProperty("tieuDe", note.tieuDe);
+//        jsonObject.addProperty("ngayTao", Note.getNgayStr(note.ngayTao));
+//        jsonObject.addProperty("ngayCapNhat", Note.getNgayStr(note.ngayCapNhat));
+//        jsonObject.addProperty("noiDung", note.noiDung.toString());
+//        jsonObject.addProperty("noiDungCua", belong);
+//
+//        // Chuyển đối tượng JSON thành chuỗi
+//        String json = jsonObject.toString();
+//        Log.e("TAG", "saveNote: " + json);
+//        Request request = new Request.Builder()
+//                .url("https://ttcs-test.000webhostapp.com/androidApi/insertNote.php")
+//                .post(RequestBody.create(mediaType, json))
+//                .build();
+//        client.newCall(request).enqueue(new Callback() {
+//            @Override
+//            public void onFailure(Call call, IOException e) {
+//                Log.e("Error", "Error");
+//            }
+//
+//            @Override
+//            public void onResponse(Call call, Response response) throws IOException {
+//                String json = response.body().string();
+//                runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        Gson gson = new Gson();
+//                        JsonElement jsonElement = gson.fromJson(json, JsonElement.class);
+//                        JsonObject jsonObject = jsonElement.getAsJsonObject();
+//                        String message = "";
+//                        boolean status = false;
+//                        if (jsonObject.has("message")) {
+//                            message = jsonObject.get("message").getAsString();
+//
+//                        }
+//                        if (jsonObject.has("status")) {
+//                            status = jsonObject.get("status").getAsBoolean();
+//                        }
+////                                    Toast.makeText(RegisterActivity.this, tenSinhVien + status, Toast.LENGTH_SHORT).show();
+//                        if(status) {
+//                            Toast.makeText(AddNoteActivity.this, message, Toast.LENGTH_SHORT).show();
+//                            Intent intent = getIntent();
+//                            setResult(RESULT_OK);
+//                            finish();
+//                        } else {
+//                            Toast.makeText(AddNoteActivity.this, message, Toast.LENGTH_SHORT).show();
+//                            finish();
+//                        }
+//                    }
+//                });
+//            }
+//        });
     }
 
     private String getCurrentTime() {

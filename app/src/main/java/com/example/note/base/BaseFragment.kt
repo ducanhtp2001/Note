@@ -34,7 +34,6 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment(), BaseFragmentBehavior
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         (this as? BaseFragmentBehavior)?.let {
-            initView()
             initViewModel()
         }
     }
@@ -64,9 +63,11 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment(), BaseFragmentBehavior
         super.onViewCreated(view, savedInstanceState)
         (this as? BaseFragmentBehavior)?.let {
             initData()
+            initView()
             setupView()
             bindViewEvents()
             bindViewModel()
+            viewDidLoad()
         }
     }
 

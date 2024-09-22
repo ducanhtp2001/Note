@@ -24,6 +24,20 @@ class AppState {
         }
     }
 
+    fun clearData() {
+        sinhVien = SinhVien()
+        course = Course()
+        selectedNote = null
+    }
+
+    fun getSinhVien(): SinhVien {
+        return sinhVien;
+    }
+
+    fun setSinhVien(sinhVien: SinhVien) {
+        this.sinhVien = sinhVien;
+    }
+
     fun getIdSinhVien(): String {
         return sinhVien.idStr;
     }

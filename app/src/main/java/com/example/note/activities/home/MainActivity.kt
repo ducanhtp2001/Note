@@ -6,13 +6,10 @@ import android.view.LayoutInflater
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.GravityCompat
-import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.Navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI.navigateUp
-import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
-import androidx.navigation.ui.NavigationUI.setupWithNavController
 import androidx.work.Data
 import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkManager
@@ -20,17 +17,17 @@ import com.example.note.R
 import com.example.note.Tools.WorkManagerment.MyWork
 import com.example.note.activities.login.LoginActivity
 import com.example.note.base.BaseActivity
+import com.example.note.data.AppState
 import com.example.note.databinding.ActivityMainBinding
-import com.google.android.material.navigation.NavigationView
+import dagger.hilt.android.AndroidEntryPoint
 import java.time.Duration
 import java.time.ZoneId
 import java.time.ZonedDateTime
 import java.util.concurrent.TimeUnit
 
+@AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>() {
 
-    private lateinit var navigationView: NavigationView
-    private lateinit var drawer: DrawerLayout
     private var mAppBarConfiguration: AppBarConfiguration? = null
     private var navController: NavController? = null
 
@@ -46,13 +43,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     override fun initViews() {
         supportActionBar!!.setBackgroundDrawable(ColorDrawable(resources.getColor(R.color.action)))
 
-        drawer = binding.drawerLayout
-        navigationView = binding.navView
-
         mAppBarConfiguration = AppBarConfiguration.Builder(
             R.id.nav_home, R.id.nav_account, R.id.nav_settings, R.id.nav_logout, R.id.nav_trash
         )
-            .setOpenableLayout(drawer)
+            .setOpenableLayout(binding.drawerLayout)
             .build()
     }
 
@@ -61,7 +55,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     }
 
     override fun setupViewEvents() {
-        navigationView.setNavigationItemSelectedListener { item ->
+        binding.navView.setNavigationItemSelectedListener { item ->
             val id = item.itemId
             val type = DrawMenuType.getDrawMenuType(id)
 
@@ -75,34 +69,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                 DrawMenuType.LOGOUT -> logoutApp()
             }
 
-//            if (id == R.id.nav_home) {
-//                if (curentFragment != FRAGMENT_HOME) {
-//                    curentFragment = FRAGMENT_HOME
-//                    navController!!.navigate(R.id.nav_home)
-//                }
-//            } else if (id == R.id.nav_account) {
-//                if (curentFragment != FRAGMENT_ACCOUNT) {
-//                    curentFragment = FRAGMENT_ACCOUNT
-//                    navController!!.navigate(R.id.nav_account)
-//                }
-//            } else if (id == R.id.nav_trash) {
-//                if (curentFragment != FRAGMENT_TRASH) {
-//                    curentFragment = FRAGMENT_TRASH
-//                    navController!!.navigate(R.id.nav_trash)
-//                }
-//            } else if (id == R.id.nav_logout) {
-//                if (curentFragment != FRAGMENT_LOGOUT) {
-//                    logoutApp()
-//                }
-//            }
-//            val drawerLayout = findViewById<DrawerLayout>(R.id.drawer_layout)
-            drawer.closeDrawer(GravityCompat.START)
+            binding.drawerLayout.closeDrawer(GravityCompat.START)
             true
         }
-
-        navController = findNavController(this, R.id.nav_host_fragment_content_main)
-        setupActionBarWithNavController(this, navController!!, mAppBarConfiguration!!)
-        setupWithNavController(navigationView, navController!!)
     }
 
 
@@ -154,6 +123,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     private fun logoutApp() {
         val intent = Intent(this@MainActivity, LoginActivity::class.java)
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+        AppState.getInstance().clearData()
         startActivity(intent)
         finish()
     }
