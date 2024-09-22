@@ -1,4 +1,4 @@
-package com.example.note;
+package com.example.note.activities.forgot;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.note.R;
 import com.example.note.data.model.SinhVien;
 import com.example.note.data.model.TaiKhoan;
 import com.example.note.activities.login.LoginActivity;

@@ -2,11 +2,12 @@ package com.example.note.data
 
 import android.annotation.SuppressLint
 import com.example.note.data.model.Course
+import com.example.note.data.model.SinhVien
 
 class AppState {
 
-    private var idSinhVien: String? = null
-    private var course: Course? = null
+    private var sinhVien: SinhVien = SinhVien()
+    private var course: Course = Course()
 
 
     @SuppressLint("StaticFieldLeak")
@@ -21,12 +22,12 @@ class AppState {
         }
     }
 
-    fun getIdSinhVien(): String? {
-        return idSinhVien;
+    fun getIdSinhVien(): String {
+        return sinhVien.idStr;
     }
 
     fun setIdSinhVien(idSinhVien: String) {
-        this.idSinhVien = idSinhVien;
+        this.sinhVien.idStr = idSinhVien;
     }
 
     fun setCourse(course: Course) {

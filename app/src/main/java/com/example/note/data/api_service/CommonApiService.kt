@@ -3,6 +3,7 @@ package com.example.note.data.api_service
 import com.example.note.data.model.ResponseNote
 import com.example.note.data.response.BaseResponse
 import com.example.note.data.response.CheckRegisterResponse
+import com.example.note.data.response.LoginResponse
 import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.http.Body
@@ -18,4 +19,6 @@ interface CommonApiService {
     @POST("register.php")
     suspend fun register(@Body request: RequestBody): BaseResponse?
 
+    @POST("login.php")
+    suspend fun login(@Body request: RequestBody): LoginResponse?
 }

@@ -28,7 +28,7 @@ import com.example.note.UI.Calendar.CalendarToolsModel.MonHoc;
 import com.example.note.UI.Calendar.CalendarToolsModel.MyCell;
 import com.example.note.UI.Calendar.CalendarToolsModel.TableContent;
 import com.example.note.UI.home.AddNoteActivity;
-import com.example.note.MainActivity;
+import com.example.note.activities.home.MainActivity;
 import com.example.note.data.model.Schedule;
 import com.example.note.data.model.SinhVien;
 import com.example.note.R;

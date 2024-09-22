@@ -18,7 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 
-import com.example.note.MainActivity;
+import com.example.note.activities.home.MainActivity;
 import com.example.note.R;
 import com.example.note.databinding.FragmentSettingsBinding;
 

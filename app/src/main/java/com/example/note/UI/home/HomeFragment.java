@@ -31,7 +31,7 @@ import androidx.navigation.Navigation;
 
 import com.example.note.Adapter.NoteAdapter;
 import com.example.note.ApiService.ApiClient;
-import com.example.note.MainActivity;
+import com.example.note.activities.home.MainActivity;
 import com.example.note.data.model.Note;
 import com.example.note.data.model.ResponseNote;
 import com.example.note.data.model.SinhVien;

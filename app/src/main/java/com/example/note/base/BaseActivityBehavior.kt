@@ -5,5 +5,5 @@ interface BaseActivityBehavior {
     fun initData() {}
     fun setupViewEvents() {}
     fun setupObservers() {}
-    fun viewDidLoad()
+    fun viewDidLoad() {}
 }

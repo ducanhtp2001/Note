@@ -18,7 +18,7 @@ import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 import com.example.note.ApiService.ApiClient;
-import com.example.note.MainActivity;
+import com.example.note.activities.home.MainActivity;
 import com.example.note.data.model.ResponseAvatar;
 import com.example.note.data.model.ResponseStatus;
 import com.example.note.data.model.SinhVien;

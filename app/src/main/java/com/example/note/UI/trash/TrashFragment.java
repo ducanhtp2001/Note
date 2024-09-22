@@ -19,7 +19,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.note.Adapter.NoteInTrashAdapter;
-import com.example.note.MainActivity;
+import com.example.note.activities.home.MainActivity;
 import com.example.note.data.model.Note;
 import com.example.note.data.model.NoteInTrash;
 import com.example.note.R;

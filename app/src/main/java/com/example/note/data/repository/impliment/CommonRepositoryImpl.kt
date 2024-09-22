@@ -6,6 +6,7 @@ import com.example.note.data.response.CheckRegisterResponse
 import com.example.note.Tools.model_hepler.ModelHelper
 import com.example.note.data.model.TaiKhoan
 import com.example.note.data.response.BaseResponse
+import com.example.note.data.response.LoginResponse
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
@@ -29,6 +30,20 @@ class CommonRepositoryImpl(
         try {
             val body = ModelHelper.buildRegisterRequestBody(taiKhoan)
             val result = apiService.register(body)
+            emit(result)
+        } catch (exception: Exception) {
+            emit(null)
+            throw exception
+        }
+    }
+
+    override suspend fun login(
+        account: String,
+        password: String
+    ): Flow<LoginResponse?> = flow {
+        try {
+            val body = ModelHelper.buildLoginRequestBody(account, password)
+            val result = apiService.login(body)
             emit(result)
         } catch (exception: Exception) {
             emit(null)

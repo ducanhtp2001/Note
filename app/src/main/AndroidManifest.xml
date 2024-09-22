@@ -30,10 +30,10 @@
             <!-- Other activity attributes -->
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.home.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".ForgetPassActivity"
+            android:name=".activities.forgot.ForgetPassActivity"
             android:exported="false" />
         <activity
             android:name=".activities.register.RegisterActivity"

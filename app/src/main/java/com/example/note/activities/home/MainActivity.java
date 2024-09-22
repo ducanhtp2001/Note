@@ -1,4 +1,4 @@
-    package com.example.note;
+    package com.example.note.activities.home;
 
     import android.content.Intent;
     import android.graphics.drawable.ColorDrawable;
@@ -18,7 +18,7 @@
     import androidx.work.OneTimeWorkRequest;
     import androidx.work.WorkManager;
 
-    import com.example.note.data.UserData;
+    import com.example.note.R;
     import com.example.note.Tools.WorkManagerment.MyWork;
     import com.example.note.activities.login.LoginActivity;
     import com.example.note.databinding.ActivityMainBinding;
@@ -48,13 +48,6 @@
             super.onCreate(savedInstanceState);
 
             getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.action)));
-
-            Intent intent = getIntent();
-            idSinhVien = ((Intent) intent).getStringExtra("ID_SINHVIEN");
-            UserData.setIdSinhVien(idSinhVien);
-
-            binding = ActivityMainBinding.inflate(getLayoutInflater());
-            setContentView(binding.getRoot());
 
             DrawerLayout drawer = binding.drawerLayout;
             NavigationView navigationView = binding.navView;

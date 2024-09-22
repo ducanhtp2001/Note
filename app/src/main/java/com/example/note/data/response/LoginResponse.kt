@@ -1,6 +1,7 @@
 package com.example.note.data.response
 
-data class BaseResponse (
+class LoginResponse (
+    val idSinhVien: String? = "",
     val status: Boolean? = false,
     val message: String? = ""
 )

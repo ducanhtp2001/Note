@@ -31,8 +31,8 @@ class ModelHelper {
 
         fun buildLoginRequestBody(account: String, password: String): RequestBody {
             val map = mapOf(
-                "taiKhoan" to account,
-                "matKhau" to password
+                "idSinhVien" to account,
+                "password" to password
             )
             return buildRequestBody(map)
         }
