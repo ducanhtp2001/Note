@@ -1,5 +1,6 @@
 package com.example.note.Tools.model_hepler
 
+import com.example.note.data.model.Note
 import com.example.note.data.model.SinhVien
 import com.example.note.data.model.TaiKhoan
 import com.google.gson.Gson
@@ -27,6 +28,23 @@ class ModelHelper {
 
             val json = gson.toJson(data)
             return RequestBody.create(mediaType, json)
+        }
+
+        fun buildEditNoteRequestBody(idSinhVien: Int, note: Note): RequestBody {
+            val map = mutableMapOf(
+                "idSinhVien" to idSinhVien.toString(),
+                "tieuDe" to note.tieuDe.toString(),
+                "ngayTao" to note.ngayTao.toString(),
+                "ngayCapNhat" to note.ngayCapNhat.toString(),
+                "noiDung" to note.noiDung.toString(),
+            )
+            if (note.noiDungCua != null) {
+                map["noiDungCua"] = note.noiDungCua.toString()
+            }
+            note.id?.let {
+                if (it >= 0) map["id"] = it.toString()
+            }
+            return buildRequestBody(map)
         }
 
         fun buildIDRequestBody(id: Int): RequestBody {

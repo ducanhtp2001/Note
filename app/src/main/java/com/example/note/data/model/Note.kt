@@ -1,5 +1,6 @@
 package com.example.note.data.model
 
+import com.example.note.Tools.date_time.DateTimeHepler
 import com.google.gson.annotations.SerializedName
 import java.text.ParseException
 import java.text.SimpleDateFormat
@@ -37,10 +38,8 @@ data class Note(
     }
 
     private fun convertStringToDate(dateString: String): Date? {
-        val dateFormat = SimpleDateFormat("yyyy-MM-dd")
-
         try {
-            return dateFormat.parse(dateString)
+            return DateTimeHepler.RESPONSE_SDF.parse(dateString)
         } catch (e: ParseException) {
             e.printStackTrace()
             return null

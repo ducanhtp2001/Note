@@ -28,7 +28,7 @@ interface CommonApiService {
     suspend fun deleteNote(@Body request: RequestBody): BaseResponse?
 
     @POST("insertNote.php")
-    suspend fun insertNote(@Body request: RequestBody): BaseResponse?
+    suspend fun editNote(@Body request: RequestBody): BaseResponse?
 
     @POST("getClass.php")
     suspend fun getClassById(@Body request: RequestBody): ResponseClass?

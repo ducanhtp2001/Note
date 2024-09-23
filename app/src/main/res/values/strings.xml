@@ -41,6 +41,9 @@
 
     <string name="common_err">Error</string>
 
+    <string name="common_success">Success</string>
+    <string name="common_fail">Fail</string>
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="input_to_search">Input to search</string>
     <string name="delete_success">Delete success</string>

@@ -5,6 +5,7 @@ import com.example.note.data.repository.repo.CommonRepository
 import com.example.note.data.response.CheckRegisterResponse
 import com.example.note.Tools.model_hepler.ModelHelper
 import com.example.note.data.AppState
+import com.example.note.data.model.Note
 import com.example.note.data.model.ResponseClass
 import com.example.note.data.model.ResponseNote
 import com.example.note.data.model.ResponseSchedule
@@ -67,9 +68,21 @@ class CommonRepositoryImpl(
         }
     }
 
+    override suspend fun editNote(note: Note): Flow<BaseResponse?> = flow {
+        try {
+            val idSinhVien = AppState.getInstance().getSinhVien().id
+            val body = ModelHelper.buildEditNoteRequestBody(idSinhVien, note)
+            val result = apiService.editNote(body)
+            emit(result)
+        } catch (exception: Exception) {
+            emit(null)
+            throw exception
+        }
+    }
+
     override suspend fun deleteNote(id: Int): Flow<BaseResponse?> = flow {
         try {
-            val idSinhVien = AppState.getInstance().getSinhVien().idStr
+            val idSinhVien = AppState.getInstance().getSinhVien().id.toString()
             val body = ModelHelper.buildDeleteNoteRequestBody(idSinhVien, id)
             val result = apiService.deleteNote(body)
             emit(result)

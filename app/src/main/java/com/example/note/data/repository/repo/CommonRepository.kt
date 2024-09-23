@@ -1,5 +1,6 @@
 package com.example.note.data.repository.repo
 
+import com.example.note.data.model.Note
 import com.example.note.data.model.ResponseClass
 import com.example.note.data.model.ResponseNote
 import com.example.note.data.model.ResponseSchedule
@@ -15,6 +16,7 @@ interface CommonRepository {
     suspend fun login(account: String, password: String): Flow<LoginResponse?>
 
     suspend fun getNote(): Flow<ResponseNote?>
+    suspend fun editNote(note: Note): Flow<BaseResponse?>
     suspend fun deleteNote(id: Int): Flow<BaseResponse?>
     suspend fun getClassById(): Flow<ResponseClass?>
     suspend fun getSchedules(): Flow<ResponseSchedule?>

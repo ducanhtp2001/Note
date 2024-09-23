@@ -1,9 +1,12 @@
 package com.example.note.Adapter
 
 import android.content.Context
+import android.view.ContextMenu
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -16,6 +19,8 @@ class NoteAdapter : ListAdapter<Note, NoteAdapter.ViewHolder>(NoteDiff()){
 
     interface NoteAdapterListener {
         fun onNoteClick(note: Note)
+        fun onPinClick(note: Note)
+        fun onDeleteClick(note: Note)
     }
 
     private var listener: NoteAdapterListener? = null
@@ -24,10 +29,12 @@ class NoteAdapter : ListAdapter<Note, NoteAdapter.ViewHolder>(NoteDiff()){
         this.listener = listener
     }
 
-    inner class ViewHolder(private val binding: NoteLayoutBinding, private val context: Context): RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolder(private val binding: NoteLayoutBinding, private val context: Context)
+        : RecyclerView.ViewHolder(binding.root) {
 
-        fun bindItem(note: Note) {
+        fun bindItem(note: Note, position: Int) {
             binding.noteTitle.text = note.tieuDe
+            binding.editTime.text = note.ngayCapNhat
             try {
                 binding.editTime.text = DateTimeHepler.RESPONSE_SDF.format(note.ngayCapNhat)
             } catch (_: Exception) {}
@@ -35,6 +42,15 @@ class NoteAdapter : ListAdapter<Note, NoteAdapter.ViewHolder>(NoteDiff()){
 
             binding.root.setOnClickListener {
                 listener?.onNoteClick(note)
+            }
+
+            binding.apply {
+                pinBtn.setOnClickListener {
+                    listener?.onPinClick(note)
+                }
+                deleteBtn.setOnClickListener {
+                    listener?.onDeleteClick(note)
+                }
             }
 
             val animation = AnimationUtils.loadAnimation(context, R.anim.listview_anim)
@@ -48,7 +64,7 @@ class NoteAdapter : ListAdapter<Note, NoteAdapter.ViewHolder>(NoteDiff()){
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bindItem(getItem(position))
+        holder.bindItem(getItem(position), position)
     }
 }
 

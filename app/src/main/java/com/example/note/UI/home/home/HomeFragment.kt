@@ -18,6 +18,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView.AdapterContextMenuInfo
 import androidx.core.app.NotificationCompat
+import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation.findNavController
 import com.example.note.Adapter.NoteAdapter
@@ -29,8 +30,7 @@ import com.example.note.Tools.SecutityTools.KeyStoreSystem_RSA
 import com.example.note.Tools.log_helper.LogHelper
 import com.example.note.UI.Calendar.CalendarFragment
 import com.example.note.UI.School.SchoolFragment
-import com.example.note.UI.home.add_note.AddNoteActivity
-import com.example.note.UI.home.edit_note.EditNoteActivity
+import com.example.note.UI.home.add_note.EditNoteBottomSheetFragment
 import com.example.note.UI.settings.SettingsFragment
 import com.example.note.base.BaseFragment
 import com.example.note.base.provideViewModels
@@ -38,10 +38,15 @@ import com.example.note.data.AppState
 import com.example.note.data.model.Note
 import com.example.note.data.model.SinhVien.Companion.getIdFromMaSinhVien
 import com.example.note.databinding.FragmentHomeBinding
+import com.example.note.handler.BaseHandler
+import com.example.note.handler.BaseHandlerImpl
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class HomeFragment : BaseFragment<FragmentHomeBinding>(), NoteAdapter.NoteAdapterListener {
+class HomeFragment : BaseFragment<FragmentHomeBinding>(),
+    NoteAdapter.NoteAdapterListener,
+    EditNoteBottomSheetFragment.EditNoteListener,
+    BaseHandler by BaseHandlerImpl(){
 
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentHomeBinding = {
         inflater, container, attachToParent -> FragmentHomeBinding.inflate(inflater, container, attachToParent)
@@ -73,13 +78,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), NoteAdapter.NoteAdapte
 
         binding.listView.setAdapter(adapter)
         adapter.setListener(this)
-        registerForContextMenu(binding.listView)
     }
 
     override fun bindViewEvents() {
         binding.fabAddNote.setOnClickListener {
-            val intent = Intent(activity, AddNoteActivity::class.java)
-            startActivityForResult(intent, RESULT_CODE_ADDNOTE)
+            AppState.getInstance().setSelectedNote(null)
+            openEditBottomSheet(requireActivity(), this)
         }
 
         binding.btnExit.setOnClickListener {
@@ -99,14 +103,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), NoteAdapter.NoteAdapte
         binding.bottomNavigationView.setOnNavigationItemSelectedListener { item ->
             val id = item.itemId
             replaceFragment(NavMenuType.getFragmentInstance(id))
-//            if (id == R.id.calendar) {
-//                replaceFragment(CalendarFragment())
-//            } else if (id == R.id.home) {
-//                if (parentFragment !is HomeFragment) {
-//                    val navController =
-//                        findNavController(requireActivity(), R.id.nav_host_fragment_content_main)
-//                    navController.navigate(R.id.nav_home)
-//                }
             true
         }
     }
@@ -122,11 +118,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), NoteAdapter.NoteAdapte
             val selectedNote = AppState.getInstance().getSelectedNote().guard { return@bindTo }
 
             val query = "INSERT INTO note VALUES (null, " + idSinhVien +
-                    ", '" + KeyStoreSystem_RSA.encryptData(selectedNote.tieuDe) +
-                    "', '" + KeyStoreSystem_RSA.encryptData(Note.getNgayStr(selectedNote.ngayTaoDate)) +
-                    "', '" + KeyStoreSystem_RSA.encryptData(Note.getNgayStr(selectedNote.ngayCapNhatDate)) +
-                    "', '" + KeyStoreSystem_RSA.encryptData(selectedNote.noiDung) +
-                    "', '" + KeyStoreSystem_RSA.encryptData(selectedNote.noiDungCua) + "')"
+                    ", '" + selectedNote.tieuDe +
+                    "', '" + Note.getNgayStr(selectedNote.ngayTaoDate) +
+                    "', '" + Note.getNgayStr(selectedNote.ngayCapNhatDate) +
+                    "', '" + selectedNote.noiDung +
+                    "', '" + selectedNote.noiDungCua + "')"
 
             connect?.nonReturnQuery(query)
             val msg = if (status) getString(R.string.delete_success) else getString(R.string.delete_false)
@@ -139,8 +135,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), NoteAdapter.NoteAdapte
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.main, menu)
         super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.main, menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -203,37 +199,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), NoteAdapter.NoteAdapte
         }
     }
 
-    override fun onCreateContextMenu(menu: ContextMenu, v: View, menuInfo: ContextMenuInfo?) {
-        super.onCreateContextMenu(menu, v, menuInfo)
-
-        val info = menuInfo as AdapterContextMenuInfo?
-        adapter.currentList[info!!.position]?.let {
-            requireActivity().menuInflater.inflate(R.menu.note_menu, menu)
-        }
-    }
-
-    override fun onContextItemSelected(item: MenuItem): Boolean {
-        val info = item.menuInfo as? AdapterContextMenuInfo
-        val position = info?.position.guard { return super.onContextItemSelected(item) }
-        val selectedNote = adapter.currentList.getOrNull(position)
-
-        if (selectedNote != null) {
-            val itemId = item.itemId
-            if (itemId == R.id.action_pin) {
-                val noteTitle = selectedNote.tieuDe ?: ""
-                showPinNotification(noteTitle)
-                return true
-            } else if (itemId == R.id.action_del) {
-                deleteNote(selectedNote)
-                return true
-            }
-        }
-
-        return super.onContextItemSelected(item)
-    }
-
     private fun deleteNote(selectedNote: Note) {
-        val idSinhVien = getIdFromMaSinhVien(idSinhVienstr!!)
         AppState.getInstance().setSelectedNote(selectedNote)
         selectedNote.id?.let {
             viewModel.deleteNote(it)
@@ -280,7 +246,21 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), NoteAdapter.NoteAdapte
     }
 
     override fun onNoteClick(note: Note) {
-        val intent = Intent(activity, EditNoteActivity::class.java)
-        startActivityForResult(intent, RESULT_CODE_EDITNOTE)
+        AppState.getInstance().setSelectedNote(note)
+        openEditBottomSheet(requireActivity(), this)
+    }
+
+    override fun onPinClick(note: Note) {
+        val noteTitle = note.tieuDe ?: ""
+        showPinNotification(noteTitle)
+    }
+
+    override fun onDeleteClick(note: Note) {
+        deleteNote(note)
+    }
+
+    override fun onSave(note: Note) {
+        LogHelper.logDebug(this.javaClass, "note to save: $note")
+        viewModel.editNote(note)
     }
 }

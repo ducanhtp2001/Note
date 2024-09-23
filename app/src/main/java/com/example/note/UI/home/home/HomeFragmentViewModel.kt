@@ -1,5 +1,6 @@
 package com.example.note.UI.home.home
 
+import com.example.note.R
 import com.example.note.Tools.log_helper.LogHelper
 import com.example.note.base.BaseViewModel
 import com.example.note.data.model.Note
@@ -27,6 +28,26 @@ class HomeFragmentViewModel @Inject constructor(): BaseViewModel() {
         searchLocal()
     }
 
+    fun editNote(note: Note) {
+        launch {
+            useCase.editNote(note)
+                .injectLoading()
+                .catch {
+                    LogHelper.logDebug(this.javaClass, it.message.toString())
+                }
+                .collect { response ->
+                    response?.status?.let {
+                        if (it) {
+                            getNotes()
+                        }
+                    }
+                    response?.message?.let {
+                        showToast(it)
+                    }
+                }
+        }
+    }
+
     fun deleteNote(noteId: Int) {
         launch {
             useCase.deleteNote(noteId)
@@ -35,9 +56,13 @@ class HomeFragmentViewModel @Inject constructor(): BaseViewModel() {
                     LogHelper.logDebug(this.javaClass, it.message.toString())
                 }
                 .collect { response ->
-                    response?.let {
+                    response?.let { it ->
                         it.status?.let {
-                            getNotes()
+                            val notes = _displayNotes.value
+                            notes.firstOrNull { it.id == noteId }?.let { noteToDelete ->
+                                notes.remove(noteToDelete)
+                            }
+                            _displayNotes.emit(notes)
                         }
                         _deleteResponse.emit(it.status ?: false)
                     }

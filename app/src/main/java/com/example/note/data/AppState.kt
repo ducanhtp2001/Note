@@ -58,7 +58,7 @@ class AppState {
         return selectedNote
     }
 
-    fun setSelectedNote(selectedNote: Note) {
+    fun setSelectedNote(selectedNote: Note?) {
         this.selectedNote = selectedNote
     }
 }

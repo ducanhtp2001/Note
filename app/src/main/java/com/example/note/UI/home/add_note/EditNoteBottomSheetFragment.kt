@@ -3,8 +3,6 @@ package com.example.note.UI.home.add_note
 import android.content.res.Configuration
 import android.content.res.Resources
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +10,7 @@ import com.example.note.R
 import com.example.note.Tools.AnotherTools.guard
 import com.example.note.Tools.addTextWatcher
 import com.example.note.Tools.date_time.DateTimeHepler
+import com.example.note.Tools.log_helper.LogHelper
 import com.example.note.base.BaseBottomSheetDialogFragment
 import com.example.note.base.provideViewModels
 import com.example.note.data.AppState
@@ -85,22 +84,24 @@ class EditNoteBottomSheetFragment(
         }
 
         binding.addNoteTitle.addTextWatcher {
-            viewModel.note.tieuDe = it.toString()
+            viewModel.getNoteEdited().tieuDe = it.toString()
         }
 
         binding.mainContain.addNoteContent.addTextWatcher {
-            viewModel.note.noiDung = it.toString()
+            viewModel.getNoteEdited().noiDung = it.toString()
         }
 
         binding.fabSaveNote.setOnClickListener {
-            viewModel.getNote().let {
+            LogHelper.logDebug("save note: ${viewModel.getNoteEdited()}")
+            viewModel.getNoteEdited().let {
                 listener?.onSave(it)
+                dismiss()
             }
         }
     }
 
     private fun bindViewModel() {
-        viewModel.note.noiDungCua = context?.getString(R.string.note_belong) ?: ""
+        viewModel.getNoteEdited().noiDungCua = context?.getString(R.string.note_belong) ?: ""
     }
 
     private fun setupViews(view: View) {
@@ -111,16 +112,16 @@ class EditNoteBottomSheetFragment(
     }
 
     private fun initView() {
-        binding.addNoteTitle.setText(viewModel.note.tieuDe)
-        binding.mainContain.addNoteContent.setText(viewModel.note.noiDung)
-        binding.mainContain.lastEdit.text = viewModel.note.ngayCapNhat
+        binding.addNoteTitle.setText(viewModel.getNoteEdited().tieuDe)
+        binding.mainContain.addNoteContent.setText(viewModel.getNoteEdited().noiDung)
+        binding.mainContain.lastEdit.text = viewModel.getNoteEdited().ngayCapNhat
     }
 
     private fun setupBottomSheetBehaviour(view: View) {
         behavior = BottomSheetBehavior.from(view.parent as View)
         behavior.isHideable = true
         behavior.isDraggable = true
-        behavior.state = BottomSheetBehavior.STATE_COLLAPSED
+        behavior.state = BottomSheetBehavior.STATE_EXPANDED
         // set min height to parent view
         binding.root.minimumHeight = Resources.getSystem().displayMetrics.heightPixels
     }
