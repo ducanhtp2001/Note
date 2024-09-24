@@ -21,7 +21,7 @@
             android:name=".UI.settings.ChangePassActivity"
             android:exported="false" />
         <activity
-            android:name=".UI.School.ShowClassActivity"
+            android:name=".UI.School.show_class.ShowClassActivity"
             android:exported="false" />
         <activity
             android:name=".UI.home.edit_note.EditNoteActivity"

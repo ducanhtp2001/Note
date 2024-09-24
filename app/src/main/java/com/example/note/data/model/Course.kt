@@ -2,7 +2,7 @@ package com.example.note.data.model
 
 import java.io.Serializable
 
-class Course(
+data class Course(
     var maMon: Int? = -1,
     var tenMon: String? = "",
     var lopTinChi: Int? = -1,

@@ -48,6 +48,7 @@
     <string name="input_to_search">Input to search</string>
     <string name="delete_success">Delete success</string>
     <string name="delete_false">Delete false</string>
+    <string name="common_no_data">No Data Found</string>
     <string-array name="sort_options">
         <item>Sort by Created Time</item>
         <item>Sort by Modified Time</item>

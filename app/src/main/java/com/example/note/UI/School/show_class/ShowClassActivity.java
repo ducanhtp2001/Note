@@ -1,4 +1,4 @@
-package com.example.note.UI.School;
+package com.example.note.UI.School.show_class;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;

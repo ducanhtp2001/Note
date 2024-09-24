@@ -3,7 +3,7 @@ package com.example.note.UI.home.home
 import androidx.fragment.app.Fragment
 import com.example.note.R
 import com.example.note.UI.Calendar.CalendarFragment
-import com.example.note.UI.School.SchoolFragment
+import com.example.note.UI.School.school.SchoolFragment
 import com.example.note.UI.settings.SettingsFragment
 
 enum class NavMenuType {

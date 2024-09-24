@@ -44,7 +44,7 @@
 
     <fragment
         android:id="@+id/school"
-        android:name="com.example.note.UI.School.SchoolFragment"
+        android:name="com.example.note.UI.School.school.SchoolFragment"
         android:label="@string/bottom_school"
         tools:layout="@layout/fragment_school" />
 

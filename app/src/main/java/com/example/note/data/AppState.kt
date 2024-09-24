@@ -10,6 +10,7 @@ class AppState {
     private var sinhVien: SinhVien = SinhVien()
     private var course: Course = Course()
     private var selectedNote: Note? = null
+    private var selectedClass: Course? = null
 
 
     @SuppressLint("StaticFieldLeak")
@@ -60,5 +61,13 @@ class AppState {
 
     fun setSelectedNote(selectedNote: Note?) {
         this.selectedNote = selectedNote
+    }
+
+    fun getSelectedClass(): Course? {
+        return selectedClass
+    }
+
+    fun setSelectedClass(selectedClass: Course?) {
+        this.selectedClass = selectedClass
     }
 }
