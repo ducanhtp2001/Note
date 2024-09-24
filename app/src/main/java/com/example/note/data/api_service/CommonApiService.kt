@@ -3,6 +3,7 @@ package com.example.note.data.api_service
 import com.example.note.data.model.ResponseClass
 import com.example.note.data.model.ResponseNote
 import com.example.note.data.model.ResponseSchedule
+import com.example.note.data.model.ResponseSinhVien
 import com.example.note.data.response.BaseResponse
 import com.example.note.data.response.CheckRegisterResponse
 import com.example.note.data.response.LoginResponse
@@ -35,6 +36,9 @@ interface CommonApiService {
 
     @POST("getCalendar.php")
     suspend fun getSchedules(@Body request: RequestBody): ResponseSchedule?
+
+    @POST("getStudents.php")
+    suspend fun getStudents(@Body request: RequestBody): ResponseSinhVien?
 
 //    @POST("getAvatarUrl.php")
 //    suspend fun getAvatarUrl(@Body request: RequestBody): ResponseAvatar?

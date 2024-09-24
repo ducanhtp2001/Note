@@ -8,7 +8,6 @@ import com.example.note.data.model.SinhVien
 class AppState {
 
     private var sinhVien: SinhVien = SinhVien()
-    private var course: Course = Course()
     private var selectedNote: Note? = null
     private var selectedClass: Course? = null
 
@@ -27,7 +26,6 @@ class AppState {
 
     fun clearData() {
         sinhVien = SinhVien()
-        course = Course()
         selectedNote = null
     }
 
@@ -45,14 +43,6 @@ class AppState {
 
     fun setIdSinhVien(idSinhVien: String) {
         this.sinhVien.idStr = idSinhVien;
-    }
-
-    fun setCourse(course: Course) {
-        this.course = course;
-    }
-
-    fun getCourse(): Course {
-        return course;
     }
 
     fun getSelectedNote(): Note? {

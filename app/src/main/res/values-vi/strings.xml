@@ -49,6 +49,7 @@
     <string name="delete_success">Xóa thành công</string>
     <string name="delete_false">Xóa thất bại</string>
     <string name="common_no_data">Không có dữ liệu</string>
+    <string name="discussion">Thảo luận</string>
     <string-array name="sort_options">
         <item>Lọc bởi thời gian tạo</item>
         <item>Lọc bởi thời gian cập nhật</item>

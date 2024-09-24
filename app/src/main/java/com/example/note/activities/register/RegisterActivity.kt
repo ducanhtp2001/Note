@@ -81,7 +81,7 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding>() {
                 } else {
                     viewModel.checkRegister(it.toString()) {
                         runOnUiThread {
-                            if (viewModel.sinhVien.value.hoTen.isEmpty())
+                            if (viewModel.sinhVien.value.hoTen?.isEmpty() == true)
                                 toaster.display(R.string.err_student_id_not_found)
                             else {
                                 val password = binding.password.text.toString()

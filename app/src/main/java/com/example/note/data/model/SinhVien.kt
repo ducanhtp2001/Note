@@ -7,12 +7,12 @@ import java.util.Locale
 
 data class SinhVien(
     var id: Int = -1,
-    var hoTen: String = "",
-    var ngaySinh: Date = Date(),
-    var gioiTinh: String = "",
-    var queQuan: String = "",
-    var gmail: String = "",
-    var sdt: String = "",
+    var hoTen: String? = "",
+    var ngaySinh: String? = "",
+    var gioiTinh: String? = "",
+    var queQuan: String? = "",
+    var gmail: String? = "",
+    var sdt: String? = "",
     var khoa: Int = -1,
     var nienKhoa: Int = -1,
     var lop: Int = -1

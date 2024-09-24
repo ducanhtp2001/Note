@@ -1,5 +1,6 @@
 package com.example.note.Tools.model_hepler
 
+import com.example.note.data.model.Course
 import com.example.note.data.model.Note
 import com.example.note.data.model.SinhVien
 import com.example.note.data.model.TaiKhoan
@@ -78,6 +79,14 @@ class ModelHelper {
         private fun buildRequestBody(map: Map<String, String>): RequestBody {
             val json = gson.toJson(map)
             return RequestBody.create(mediaType, json)
+        }
+
+        fun buildStudentsRequestBody(selectedCourse: Course): RequestBody {
+            val map = mapOf(
+                "maMon" to selectedCourse.maMon.toString(),
+                "lopTinChi" to selectedCourse.lopTinChi.toString()
+            )
+            return buildRequestBody(map)
         }
     }
 }

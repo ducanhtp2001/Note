@@ -51,7 +51,7 @@ class SchoolFragment : BaseFragment<FragmentSchoolBinding>(), ClassAdapter.Class
     }
 
     override fun onClassClick(course: Course, position: Int) {
-        AppState.getInstance().setCourse(course)
+        AppState.getInstance().setSelectedClass(course)
         startActivity(Intent(requireContext(), ShowClassActivity::class.java))
     }
 

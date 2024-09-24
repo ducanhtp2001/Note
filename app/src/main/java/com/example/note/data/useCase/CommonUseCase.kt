@@ -14,6 +14,8 @@ class CommonUseCase @Inject constructor(private val repository: CommonRepository
     suspend fun getClassById() = repository.getClassById()
     suspend fun getSchedules() = repository.getSchedules()
     suspend fun deleteNote(noteId: Int) = repository.deleteNote(noteId)
+    suspend fun getStudents() = repository.getStudents()
+
 
 //    suspend fun saveNote(note: Note) = repository.saveNote(note)
 //    suspend fun deleteNote(id: Int) = repository.deleteNote(id)

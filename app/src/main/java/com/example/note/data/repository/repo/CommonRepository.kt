@@ -4,6 +4,7 @@ import com.example.note.data.model.Note
 import com.example.note.data.model.ResponseClass
 import com.example.note.data.model.ResponseNote
 import com.example.note.data.model.ResponseSchedule
+import com.example.note.data.model.ResponseSinhVien
 import com.example.note.data.model.TaiKhoan
 import com.example.note.data.response.BaseResponse
 import com.example.note.data.response.CheckRegisterResponse
@@ -20,6 +21,8 @@ interface CommonRepository {
     suspend fun deleteNote(id: Int): Flow<BaseResponse?>
     suspend fun getClassById(): Flow<ResponseClass?>
     suspend fun getSchedules(): Flow<ResponseSchedule?>
+    suspend fun getStudents(): Flow<ResponseSinhVien?>
+
 //    suspend fun getAvatarUrl(idSinhVien: String): Flow<ResponseAvatar?>
 //    suspend fun setAvatarUrl(idSinhVien: String, avatarUrl: String): Flow<BaseResponse?>
 

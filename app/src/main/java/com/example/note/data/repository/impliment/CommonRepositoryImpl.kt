@@ -9,6 +9,7 @@ import com.example.note.data.model.Note
 import com.example.note.data.model.ResponseClass
 import com.example.note.data.model.ResponseNote
 import com.example.note.data.model.ResponseSchedule
+import com.example.note.data.model.ResponseSinhVien
 import com.example.note.data.model.TaiKhoan
 import com.example.note.data.response.BaseResponse
 import com.example.note.data.response.LoginResponse
@@ -109,6 +110,18 @@ class CommonRepositoryImpl(
             val id = AppState.getInstance().getSinhVien().id
             val body = ModelHelper.buildIDRequestBody(id)
             val result = apiService.getSchedules(body)
+            emit(result)
+        } catch (exception: Exception) {
+            emit(null)
+            throw exception
+        }
+    }
+
+    override suspend fun getStudents(): Flow<ResponseSinhVien?> = flow {
+        try {
+            val selectedCourse = AppState.getInstance().getSelectedClass()
+            val body = ModelHelper.buildStudentsRequestBody(selectedCourse!!)
+            val result = apiService.getStudents(body)
             emit(result)
         } catch (exception: Exception) {
             emit(null)
