@@ -4,6 +4,7 @@ import com.example.note.R
 import com.example.note.Tools.log_helper.LogHelper
 import com.example.note.base.BaseViewModel
 import com.example.note.data.AppState
+import com.example.note.data.model.TaiKhoan
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -15,6 +16,9 @@ class LoginViewModel @Inject constructor(): BaseViewModel() {
 
     private val _loginSuccess = MutableSharedFlow<Boolean>()
     val loginSuccess: SharedFlow<Boolean> = _loginSuccess
+
+    private val _lastLogin = MutableSharedFlow<TaiKhoan?>()
+    val lastLogin: SharedFlow<TaiKhoan?> = _lastLogin
 
     fun login(account: String, password: String) {
         launch {
@@ -30,10 +34,26 @@ class LoginViewModel @Inject constructor(): BaseViewModel() {
                         }
                         if (response.status == true) {
                             AppState.getInstance().setIdSinhVien(account)
+                            val idSinhVien = AppState.getInstance().getSinhVien().id
+                            dataStoreUseCase.updateFirstTimeLaunch(true)
+                            dataStoreUseCase.setLastLogin(TaiKhoan(idSinhVien, account, password))
                             _loginSuccess.emit(true)
                         }
                     } ?: run {
                         _toastRes.emit(R.string.common_err)
+                    }
+                }
+        }
+    }
+
+    fun getLastLogin() {
+        launch {
+            dataStoreUseCase.getLastLogin()
+                .collect { taiKhoan ->
+                    taiKhoan?.let {
+                        _lastLogin.emit(it)
+                    } ?: run {
+                        _lastLogin.emit(null)
                     }
                 }
         }

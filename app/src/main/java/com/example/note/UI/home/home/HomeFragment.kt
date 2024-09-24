@@ -100,6 +100,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(),
 
         })
 
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            viewModel.getNotes()
+            binding.swipeRefreshLayout.isRefreshing = false
+        }
+
         binding.bottomNavigationView.setOnNavigationItemSelectedListener { item ->
             val id = item.itemId
             replaceFragment(NavMenuType.getFragmentInstance(id))
@@ -119,8 +124,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(),
 
             val query = "INSERT INTO note VALUES (null, " + idSinhVien +
                     ", '" + selectedNote.tieuDe +
-                    "', '" + Note.getNgayStr(selectedNote.ngayTaoDate) +
-                    "', '" + Note.getNgayStr(selectedNote.ngayCapNhatDate) +
+                    "', '" + selectedNote.ngayTao +
+                    "', '" + selectedNote.ngayCapNhat +
                     "', '" + selectedNote.noiDung +
                     "', '" + selectedNote.noiDungCua + "')"
 

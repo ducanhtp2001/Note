@@ -17,3 +17,11 @@ fun EditText.addTextWatcher(callback: (CharSequence?) -> Unit) {
 
     })
 }
+
+fun tryWithLog(block: () -> Unit) {
+    try {
+        block()
+    } catch (e: Exception) {
+        e.printStackTrace()
+    }
+}

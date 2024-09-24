@@ -1,6 +1,7 @@
 package com.example.note.Tools.date_time
 
 import java.text.SimpleDateFormat
+import java.util.Date
 import java.util.Locale
 
 class DateTimeHepler {
@@ -14,6 +15,17 @@ class DateTimeHepler {
 
         fun getCurrentTime(): String? {
              return DateTimeHepler.RESPONSE_SDF.format(System.currentTimeMillis())
+        }
+
+        fun reportTimeToDate(time: String?): Date? {
+            try {
+                time?.let {
+                    return RESPONSE_SDF.parse(it)
+                } ?: return  null
+            } catch (e: Exception) {
+                e.printStackTrace()
+                return null
+            }
         }
     }
 }

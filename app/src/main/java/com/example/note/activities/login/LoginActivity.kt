@@ -21,6 +21,11 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
         ActivityLoginBinding.inflate(inflater)
     }
 
+    override fun viewDidLoad() {
+        super.viewDidLoad()
+        viewModel.getLastLogin()
+    }
+
     override fun setupViewEvents() {
         super.setupViewEvents()
 
@@ -51,6 +56,11 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
 
     override fun setupObservers() {
         super.setupObservers()
+
+        viewModel.lastLogin.bindTo {
+            binding.lIdStuden.setText(it?.taiKhoan ?: "")
+            binding.lPassword.setText(it?.matKhau ?: "")
+        }
 
         viewModel.loginSuccess.bindTo {  loginStatus ->
             if (loginStatus) {

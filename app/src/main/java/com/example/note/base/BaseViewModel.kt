@@ -3,6 +3,7 @@ package com.example.note.base
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.note.data.useCase.CommonUseCase
+import com.example.note.data.useCase.DataStoreUseCase
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -17,6 +18,9 @@ abstract class BaseViewModel: ViewModel() {
 
     @Inject
     lateinit var useCase: CommonUseCase
+
+    @Inject
+    lateinit var dataStoreUseCase: DataStoreUseCase
 
     protected val _showLoading = MutableSharedFlow<Boolean>()
     val showLoading: SharedFlow<Boolean> = _showLoading

@@ -41,15 +41,16 @@
                 android:id="@+id/textInputLayoutAccount"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="0dp"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 app:endIconMode="clear_text"
+                android:gravity="center_vertical"
                 app:startIconDrawable="@drawable/magnifying">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/txtSearch"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:completionThreshold="1"
                     android:fontFamily="@font/adamina"
                     android:inputType="text"
@@ -61,12 +62,19 @@
 
         </LinearLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/listView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/note_layout"/>
+       <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+           android:id="@+id/swipeRefreshLayout"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_marginBottom="?attr/actionBarSize">
+
+           <androidx.recyclerview.widget.RecyclerView
+               android:id="@+id/listView"
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+               tools:listitem="@layout/note_layout"/>
+       </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     </LinearLayout>
 

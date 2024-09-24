@@ -1,6 +1,7 @@
 package com.example.note.UI.home.home
 
 import com.example.note.R
+import com.example.note.Tools.date_time.DateTimeHepler
 import com.example.note.Tools.log_helper.LogHelper
 import com.example.note.base.BaseViewModel
 import com.example.note.data.model.Note
@@ -81,7 +82,7 @@ class HomeFragmentViewModel @Inject constructor(): BaseViewModel() {
                     response?.let {
                         notes.clear()
                         notes.addAll(it.notes)
-                        _displayNotes.emit(notes)
+                        _displayNotes.emit(it.notes.toMutableList())
                     }
                 }
         }
@@ -108,8 +109,8 @@ class HomeFragmentViewModel @Inject constructor(): BaseViewModel() {
         val data = _displayNotes.value
         data.sortWith{ note1, note2 ->
             java.lang.Long.compare(
-                note1.ngayCapNhatDate?.time ?: 0,
-                note2.ngayCapNhatDate?.time ?: 0
+                DateTimeHepler.reportTimeToDate(note1.ngayCapNhat)?.time ?: 0,
+                DateTimeHepler.reportTimeToDate(note2.ngayCapNhat)?.time ?: 0
             )
         }
         launch { _displayNotes.emit(data) }
@@ -119,8 +120,8 @@ class HomeFragmentViewModel @Inject constructor(): BaseViewModel() {
         val data = _displayNotes.value
         data.sortWith{ note1, note2 ->
             java.lang.Long.compare(
-                note1.ngayTaoDate?.time ?: 0,
-                note2.ngayTaoDate?.time ?: 0
+                DateTimeHepler.reportTimeToDate(note1.ngayTao)?.time ?: 0,
+                DateTimeHepler.reportTimeToDate(note2.ngayTao)?.time ?: 0
             )
         }
         launch { _displayNotes.emit(data) }
