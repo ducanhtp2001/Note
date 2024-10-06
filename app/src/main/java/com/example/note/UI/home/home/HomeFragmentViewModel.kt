@@ -4,6 +4,7 @@ import com.example.note.R
 import com.example.note.Tools.date_time.DateTimeHepler
 import com.example.note.Tools.log_helper.LogHelper
 import com.example.note.base.BaseViewModel
+import com.example.note.data.AppState
 import com.example.note.data.model.Note
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -57,13 +58,10 @@ class HomeFragmentViewModel @Inject constructor(): BaseViewModel() {
                     LogHelper.logDebug(this.javaClass, it.message.toString())
                 }
                 .collect { response ->
-                    response?.let { it ->
+                    response?.let {
                         it.status?.let {
-                            val notes = _displayNotes.value
-                            notes.firstOrNull { it.id == noteId }?.let { noteToDelete ->
-                                notes.remove(noteToDelete)
-                            }
-                            _displayNotes.emit(notes)
+                            AppState.getInstance().setSelectedNote(null)
+                            getNotes()
                         }
                         _deleteResponse.emit(it.status ?: false)
                     }
@@ -80,9 +78,10 @@ class HomeFragmentViewModel @Inject constructor(): BaseViewModel() {
                 }
                 .collect { response ->
                     response?.let {
+                        val newList = it.notes
                         notes.clear()
-                        notes.addAll(it.notes)
-                        _displayNotes.emit(it.notes.toMutableList())
+                        notes.addAll(newList)
+                        _displayNotes.emit(newList.toMutableList())
                     }
                 }
         }

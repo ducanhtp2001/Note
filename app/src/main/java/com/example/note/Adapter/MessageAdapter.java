@@ -87,29 +87,29 @@ public class MessageAdapter extends ArrayAdapter<Message> {
                 LinearLayout.LayoutParams.MATCH_PARENT
         );
 
-        if (message.idSinhVien == SinhVien.Companion.getIdFromMaSinhVien(UserData.getIdSinhVien())) {
+        if (message.getIdSinhVien() == SinhVien.Companion.getIdFromMaSinhVien(UserData.getIdSinhVien())) {
 
             layoutParams.gravity = Gravity.RIGHT;
             viewHolder.tvFrom.setText("Tôi");
         } else {
             layoutParams.gravity = Gravity.START;
-            viewHolder.tvFrom.setText(message.tenSinhVien);
+            viewHolder.tvFrom.setText(message.getTenSinhVien());
         }
 
         viewHolder.linearLayout.setLayoutParams(layoutParams);
 
-        if(message.coImg == 0) {
+        if(message.getCoImg() == 0) {
             viewHolder.imgOnMsg.setVisibility(View.GONE);
         } else {
             Bitmap bitmap;
-            bitmap = ConvertImg.String2Image(message.img);
+            bitmap = ConvertImg.String2Image(message.getImg());
             if(bitmap != null) {
                 viewHolder.imgOnMsg.setImageBitmap(bitmap);
             }
         }
 
-        viewHolder.tvTimeSend.setText(message.thoiGian);
-        viewHolder.tvMsg.setText(message.tinNhan);
+        viewHolder.tvTimeSend.setText(message.getThoiGian());
+        viewHolder.tvMsg.setText(message.getNoiDung());
 
         return convertView;
     }

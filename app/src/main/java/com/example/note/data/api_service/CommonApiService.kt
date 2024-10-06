@@ -1,5 +1,7 @@
 package com.example.note.data.api_service
 
+import com.example.note.UI.School.model.MessageResponse
+import com.example.note.UI.School.model.PostResponse
 import com.example.note.data.model.ResponseClass
 import com.example.note.data.model.ResponseNote
 import com.example.note.data.model.ResponseSchedule
@@ -39,6 +41,25 @@ interface CommonApiService {
 
     @POST("getStudents.php")
     suspend fun getStudents(@Body request: RequestBody): ResponseSinhVien?
+
+    @POST("getPost.php")
+    suspend fun getPosts(@Body request: RequestBody): PostResponse?
+
+    @POST("insertPost.php")
+    suspend fun editPosts(@Body request: RequestBody): PostResponse?
+
+    @POST("deletePost.php")
+    suspend fun deletePost(@Body request: RequestBody): BaseResponse?
+
+    @POST("getMessage.php")
+    suspend fun getMessages(@Body request: RequestBody): MessageResponse?
+
+    @POST("insertMessage.php")
+    suspend fun editMessage(@Body request: RequestBody): PostResponse?
+
+    @POST("deleteMessage.php")
+    suspend fun deleteMessage(@Body request: RequestBody): BaseResponse?
+
 
 //    @POST("getAvatarUrl.php")
 //    suspend fun getAvatarUrl(@Body request: RequestBody): ResponseAvatar?

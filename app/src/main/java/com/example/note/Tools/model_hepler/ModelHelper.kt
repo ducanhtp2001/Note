@@ -1,7 +1,9 @@
 package com.example.note.Tools.model_hepler
 
 import com.example.note.data.model.Course
+import com.example.note.data.model.Message
 import com.example.note.data.model.Note
+import com.example.note.data.model.Post
 import com.example.note.data.model.SinhVien
 import com.example.note.data.model.TaiKhoan
 import com.google.gson.Gson
@@ -48,6 +50,35 @@ class ModelHelper {
             return buildRequestBody(map)
         }
 
+        fun buildEditPostRequestBody(idSinhVien: Int, post: Post): RequestBody {
+            val map = mutableMapOf(
+                "idSinhVien" to idSinhVien.toString(),
+                "thoiGian" to post.thoiGian.toString(),
+                "noiDung" to post.noiDung.toString(),
+                "coImg" to post.coImg.toString(),
+                "img" to post.img.toString(),
+            )
+            post.id?.let {
+                if (it >= 0) map["id"] = it.toString()
+            }
+            return buildRequestBody(map)
+        }
+
+        fun buildEditMessageRequestBody(idSinhVien: Int, post: Message): RequestBody {
+            val map = mutableMapOf(
+                "idPost" to post.idPost.toString(),
+                "idSinhVien" to idSinhVien.toString(),
+                "thoiGian" to post.thoiGian.toString(),
+                "noiDung" to post.noiDung.toString(),
+                "coImg" to post.coImg.toString(),
+                "img" to post.img.toString(),
+            )
+            post.id?.let {
+                if (it >= 0) map["id"] = it.toString()
+            }
+            return buildRequestBody(map)
+        }
+
         fun buildIDRequestBody(id: Int): RequestBody {
             val map = mapOf(
                 "id" to id.toString()
@@ -82,6 +113,28 @@ class ModelHelper {
         }
 
         fun buildStudentsRequestBody(selectedCourse: Course): RequestBody {
+            val map = mapOf(
+                "maMon" to selectedCourse.maMon.toString(),
+                "lopTinChi" to selectedCourse.lopTinChi.toString()
+            )
+            return buildRequestBody(map)
+        }
+
+        fun buildDeleteByIdRequestBody(id: Int): RequestBody {
+            val map = mapOf(
+                "id" to id.toString()
+            )
+            return buildRequestBody(map)
+        }
+
+        fun buildGetMessagesRequestBody(id: Int): RequestBody {
+            val map = mapOf(
+                "idPost" to id.toString()
+            )
+            return buildRequestBody(map)
+        }
+
+        fun buildPostRequestBody(selectedCourse: Course): RequestBody {
             val map = mapOf(
                 "maMon" to selectedCourse.maMon.toString(),
                 "lopTinChi" to selectedCourse.lopTinChi.toString()

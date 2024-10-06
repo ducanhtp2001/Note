@@ -1,12 +1,9 @@
 package com.example.note.Adapter
 
 import android.content.Context
-import android.view.ContextMenu
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -15,7 +12,7 @@ import com.example.note.Tools.date_time.DateTimeHepler
 import com.example.note.data.model.Note
 import com.example.note.databinding.NoteLayoutBinding
 
-class NoteAdapter : ListAdapter<Note, NoteAdapter.ViewHolder>(NoteDiff()){
+class NoteAdapter : ListAdapter<Note, NoteAdapter.ViewHolder>(NoteDiff()) {
 
     interface NoteAdapterListener {
         fun onNoteClick(note: Note)
@@ -29,15 +26,16 @@ class NoteAdapter : ListAdapter<Note, NoteAdapter.ViewHolder>(NoteDiff()){
         this.listener = listener
     }
 
-    inner class ViewHolder(private val binding: NoteLayoutBinding, private val context: Context)
-        : RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolder(private val binding: NoteLayoutBinding, private val context: Context) :
+        RecyclerView.ViewHolder(binding.root) {
 
         fun bindItem(note: Note, position: Int) {
             binding.noteTitle.text = note.tieuDe
             binding.editTime.text = note.ngayCapNhat
             try {
                 binding.editTime.text = DateTimeHepler.RESPONSE_SDF.format(note.ngayCapNhat)
-            } catch (_: Exception) {}
+            } catch (_: Exception) {
+            }
             binding.noteBelong.text = note.noiDungCua
 
             binding.root.setOnClickListener {
@@ -60,7 +58,13 @@ class NoteAdapter : ListAdapter<Note, NoteAdapter.ViewHolder>(NoteDiff()){
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(NoteLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false), context = parent.context)
+        return ViewHolder(
+            NoteLayoutBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            ), context = parent.context
+        )
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -68,13 +72,17 @@ class NoteAdapter : ListAdapter<Note, NoteAdapter.ViewHolder>(NoteDiff()){
     }
 }
 
-class NoteDiff: DiffUtil.ItemCallback<Note>() {
+class NoteDiff : DiffUtil.ItemCallback<Note>() {
     override fun areItemsTheSame(oldItem: Note, newItem: Note): Boolean {
-        return oldItem == newItem
+        return oldItem.id == newItem.id
+                || oldItem.tieuDe == newItem.tieuDe
+                || oldItem.ngayCapNhat == newItem.ngayCapNhat
+                || oldItem.noiDungCua == newItem.noiDungCua
+                || oldItem.noiDung == newItem.noiDung
     }
 
     override fun areContentsTheSame(oldItem: Note, newItem: Note): Boolean {
-        return oldItem.id == newItem.id
+        return oldItem == newItem
     }
 
 }

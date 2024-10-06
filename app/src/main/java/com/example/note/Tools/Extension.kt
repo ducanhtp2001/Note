@@ -3,7 +3,8 @@ package com.example.note.Tools
 import android.text.Editable
 import android.text.TextWatcher
 import android.widget.EditText
-import android.widget.TextView
+import io.reactivex.rxjava3.core.BackpressureStrategy
+import io.reactivex.rxjava3.core.Flowable
 
 fun EditText.addTextWatcher(callback: (CharSequence?) -> Unit) {
     this.addTextChangedListener(object : TextWatcher {
@@ -24,4 +25,11 @@ fun tryWithLog(block: () -> Unit) {
     } catch (e: Exception) {
         e.printStackTrace()
     }
+}
+
+data class EditTextFlow(
+    val query: String,
+    val type: Type
+) {
+    enum class Type { BEFORE, AFTER, ON }
 }

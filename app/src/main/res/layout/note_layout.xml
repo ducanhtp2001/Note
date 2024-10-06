@@ -4,6 +4,7 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#D5CFCF"
+    android:paddingHorizontal="3dp"
     android:padding="0dp">
 
     <!-- TextView mới nằm phía trên edit_time -->
@@ -15,6 +16,7 @@
         android:text="@string/note_belong"
         android:textAppearance="?android:attr/textAppearanceListItem"
         android:textSize="14sp"
+        android:layout_marginTop="3dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>

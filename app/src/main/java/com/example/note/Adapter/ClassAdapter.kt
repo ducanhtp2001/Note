@@ -1,16 +1,11 @@
 package com.example.note.Adapter
 
-import android.app.Activity
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.note.R
 import com.example.note.Tools.log_helper.LogHelper
 import com.example.note.data.model.Course
 import com.example.note.databinding.ClassmateItemBinding

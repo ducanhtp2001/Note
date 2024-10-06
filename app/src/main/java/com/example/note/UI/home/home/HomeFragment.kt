@@ -22,6 +22,7 @@ import com.example.note.R
 import com.example.note.Tools.AnotherTools.guard
 import com.example.note.Tools.SQLite.Connect
 import com.example.note.Tools.SQLite.ConnectSharing
+import com.example.note.Tools.dialogHelper.DialogHelper
 import com.example.note.Tools.log_helper.LogHelper
 import com.example.note.UI.Calendar.CalendarFragment
 import com.example.note.UI.School.school.SchoolFragment
@@ -41,7 +42,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>(),
     NoteAdapter.NoteAdapterListener,
     EditNoteBottomSheetFragment.EditNoteListener,
-    BaseHandler by BaseHandlerImpl(){
+    BaseHandler by BaseHandlerImpl() {
 
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentHomeBinding = {
         inflater, container, attachToParent -> FragmentHomeBinding.inflate(inflater, container, attachToParent)
@@ -76,6 +77,26 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(),
     }
 
     override fun bindViewEvents() {
+
+        binding.topAppBar.setOnMenuItemClickListener { item ->
+            when (item.itemId) {
+                R.id.action_search -> {
+                    showSearch()
+                    true
+                }
+                R.id.action_sort_by_create -> {
+                    viewModel.sortByCreate()
+                    true
+                }
+                R.id.action_sort_by_modify -> {
+                    viewModel.shortByModify()
+                    true
+                }
+                else -> false
+            }
+        }
+
+
         binding.fabAddNote.setOnClickListener {
             AppState.getInstance().setSelectedNote(null)
             openEditBottomSheet(requireActivity(), this)
@@ -133,29 +154,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(),
     override fun viewDidLoad() {
         viewModel.getNotes()
     }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.main, menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val id = item.itemId
-        if (id == R.id.action_search) {
-            showSearch()
-            return true
-        } else if (id == R.id.action_sort_by_create) {
-            viewModel.sortByCreate()
-            return true
-        } else if (id == R.id.action_sort_by_modify) {
-            viewModel.shortByModify()
-            return true
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
-
-
 
     private fun hideSearch() {
         binding.layoutSearch.visibility = View.GONE
@@ -227,14 +225,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(),
         val notificationManager =
             requireActivity().getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            // Create the notification channel (required for Android Oreo and above)
-            val channelId = noteTitle // Use note_title as the channel ID
-            val channel =
-                NotificationChannel(channelId, channelId, NotificationManager.IMPORTANCE_HIGH)
-            notificationManager.createNotificationChannel(channel)
-        }
+        val channelId = noteTitle
+        val channel =
+            NotificationChannel(channelId, channelId, NotificationManager.IMPORTANCE_HIGH)
+        notificationManager.createNotificationChannel(channel)
 
         val builder = NotificationCompat.Builder(requireActivity(), noteTitle)
             .setSmallIcon(R.mipmap.ic_launcher)
@@ -256,7 +250,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(),
     }
 
     override fun onDeleteClick(note: Note) {
-        deleteNote(note)
+        DialogHelper.showCustomConfirmDialog(requireContext(),
+            getString(R.string.common_confirm),
+            getString(R.string.common_confirm_delete),
+            getString(R.string.common_ok),
+            getString(R.string.common_cancel),
+            positiveAction = {
+                deleteNote(note)
+            }
+        )
     }
 
     override fun onSave(note: Note) {

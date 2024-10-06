@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".UI.home.add_note.AddNoteActivity">
+
+    <data>
+
+        <variable
+            name="isHasImage"
+            type="boolean" />
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/topAppBar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:navigationIcon="@drawable/ic_arrow_back"
+                app:navigationIconTint="@color/blue"
+                app:title="@string/bottom_sheet_title_message_list"
+                app:titleTextColor="@color/blue" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+        <View
+            android:id="@+id/separator"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:layout_below="@+id/appBarLayout"
+            android:background="@color/color_gray_light"/>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/contentCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="3dp"
+            android:padding="5dp"
+            android:layout_below="@+id/separator">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="bottom"
+                android:layout_margin="3dp"
+                android:gravity="center_vertical">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edNewPost"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:paddingHorizontal="10dp"
+                    app:endIconMode="clear_text"
+                    app:boxStrokeWidth="1dp"
+                    android:gravity="center_vertical"
+                    android:hint="@string/common_comment_hint"
+                    app:startIconDrawable="@drawable/img"/>
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/btnImage"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginHorizontal="5dp"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_image"
+                    app:shapeAppearanceOverlay="@style/RoundedCornerImage"/>
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="3dp"
+            android:padding="5dp"
+            isGone="@{!isHasImage}"
+            android:layout_below="@+id/contentCard">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/clearImage"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/ic_clear"
+                    app:layout_constraintTop_toTopOf="@+id/image"
+                    app:layout_constraintEnd_toEndOf="@+id/image"/>
+
+                <ImageView
+                    android:id="@+id/image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnPost"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/bottom_sheet_btn_post"
+            android:layout_margin="10dp"
+            android:layout_alignParentBottom="true"/>
+
+    </RelativeLayout>
+
+</layout>

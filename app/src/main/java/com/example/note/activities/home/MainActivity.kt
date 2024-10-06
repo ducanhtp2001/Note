@@ -41,7 +41,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     }
 
     override fun initViews() {
-        supportActionBar!!.setBackgroundDrawable(ColorDrawable(resources.getColor(R.color.action)))
+//        supportActionBar!!.setBackgroundDrawable(ColorDrawable(resources.getColor(R.color.action)))
 
         mAppBarConfiguration = AppBarConfiguration.Builder(
             R.id.nav_home, R.id.nav_account, R.id.nav_settings, R.id.nav_logout, R.id.nav_trash

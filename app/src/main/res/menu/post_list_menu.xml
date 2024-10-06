@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/action_goto_student_list"
+        android:icon="@drawable/ic_list"
+        android:title="@string/bottom_sheet_btn_student_list"
+        app:showAsAction="always" />
+</menu>

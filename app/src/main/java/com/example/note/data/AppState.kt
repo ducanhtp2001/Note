@@ -1,6 +1,7 @@
 package com.example.note.data
 
 import android.annotation.SuppressLint
+import com.example.note.UI.School.model.PostResult
 import com.example.note.data.model.Course
 import com.example.note.data.model.Note
 import com.example.note.data.model.SinhVien
@@ -10,6 +11,8 @@ class AppState {
     private var sinhVien: SinhVien = SinhVien()
     private var selectedNote: Note? = null
     private var selectedClass: Course? = null
+
+    var selectedPost: PostResult? = null
 
 
     @SuppressLint("StaticFieldLeak")

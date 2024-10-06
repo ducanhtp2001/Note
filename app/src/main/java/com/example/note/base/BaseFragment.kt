@@ -13,11 +13,14 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
 import com.example.note.Tools.toast.Toaster
+import com.example.note.handler.BaseHandler
+import com.example.note.handler.BaseHandlerImpl
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-abstract class BaseFragment<VB : ViewBinding> : Fragment(), BaseFragmentBehavior {
+abstract class BaseFragment<VB : ViewBinding> : Fragment(), BaseFragmentBehavior,
+    BaseHandler by BaseHandlerImpl() {
 
     @Inject
     lateinit var toaster: Toaster

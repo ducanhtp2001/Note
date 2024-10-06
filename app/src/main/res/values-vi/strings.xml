@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">note</string>
+    <string name="app_name">Note</string>
     <string name="navigation_drawer_open">Mở Bảng Điều Hướng</string>
     <string name="navigation_drawer_close">Đóng Bảng Điều Hướng</string>
     <string name="nav_header_desc">Thanh Điều Hướngr</string>
@@ -42,6 +42,22 @@
 
     <string name="common_success">Thành công</string>
     <string name="common_fail">Thất bại</string>
+    <string name="common_ok">Ok</string>
+    <string name="common_cancel">Hủy bỏ</string>
+    <string name="common_comment">Bình luận</string>
+    <string name="common_comment_hint">Viết bình luận...</string>
+    <string name="common_confirm">Xác nhận</string>
+    <string name="common_confirm_delete">Bạn có muốn xóa mục này?</string>
+    <string name="common_notice">Thông báo</string>
+    <string name="common_permission_grant">Tính năng này cần bạn cấp phép</string>
+    <string name="common_later">Để sau</string>
+
+    <string name="bottom_sheet_title_post_list">Bài đăng</string>
+    <string name="bottom_sheet_new_post_hint">Bài đăng mới</string>
+    <string name="bottom_sheet_btn_student_list">Danh sách lớp</string>
+    <string name="bottom_sheet_btn_post">Đăng</string>
+
+    <string name="bottom_sheet_title_message_list">Bình luận</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

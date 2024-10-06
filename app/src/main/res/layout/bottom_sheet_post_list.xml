@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UI.home.add_note.AddNoteActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/topAppBar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:menu="@menu/post_list_menu"
+                app:navigationIcon="@drawable/ic_arrow_back"
+                app:navigationIconTint="@color/blue"
+                app:title="@string/bottom_sheet_title_post_list"
+                app:titleTextColor="@color/blue" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+       <com.google.android.material.card.MaterialCardView
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           app:cardCornerRadius="3dp"
+           app:cardElevation="3dp">
+
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="horizontal"
+               android:layout_margin="3dp"
+               android:gravity="center_vertical">
+
+               <com.google.android.material.imageview.ShapeableImageView
+                   android:id="@+id/avatar"
+                   android:layout_width="50dp"
+                   android:layout_height="50dp"
+                   android:padding="5dp"
+                   app:shapeAppearanceOverlay="@style/RoundedCornerImage"/>
+
+               <com.google.android.material.textfield.TextInputEditText
+                   android:id="@+id/edNewPost"
+                   android:layout_width="0dp"
+                   android:layout_height="50dp"
+                   android:layout_weight="1"
+                   app:endIconMode="clear_text"
+                   app:boxStrokeWidth="1dp"
+                   android:hint="@string/bottom_sheet_new_post_hint"
+                   app:startIconDrawable="@drawable/img"/>
+
+               <com.google.android.material.imageview.ShapeableImageView
+                   android:id="@+id/btnImage"
+                   android:layout_width="25dp"
+                   android:layout_height="25dp"
+                   android:layout_marginHorizontal="5dp"
+                   android:padding="5dp"
+                   android:src="@drawable/ic_image"
+                   app:shapeAppearanceOverlay="@style/RoundedCornerImage"/>
+
+           </LinearLayout>
+       </com.google.android.material.card.MaterialCardView>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="@color/color_gray_light"/>
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipeRefreshLayout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/itemList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:paddingHorizontal="8dp"/>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
