@@ -9,10 +9,13 @@ import com.example.note.data.model.ResponseClass
 import com.example.note.data.model.ResponseNote
 import com.example.note.data.model.ResponseSchedule
 import com.example.note.data.model.ResponseSinhVien
+import com.example.note.data.model.Schedule
 import com.example.note.data.model.TaiKhoan
 import com.example.note.data.response.BaseResponse
 import com.example.note.data.response.CheckRegisterResponse
 import com.example.note.data.response.LoginResponse
+import com.example.note.uI.Calendar.CalendarToolsModel.MonHoc
+import com.example.note.uI.Calendar.model.ScheduleResponse
 import kotlinx.coroutines.flow.Flow
 
 interface CommonRepository {
@@ -32,6 +35,8 @@ interface CommonRepository {
     suspend fun deleteMessage(id: Int): Flow<BaseResponse?>
     suspend fun editMessage(message: Message): Flow<BaseResponse?>
     suspend fun editPost(post: Post): Flow<BaseResponse?>
+    suspend fun editCalendar(monHoc: List<MonHoc>): Flow<BaseResponse?>
+    suspend fun getCalendar(): Flow<ScheduleResponse?>
 
 
 //    suspend fun getAvatarUrl(idSinhVien: String): Flow<ResponseAvatar?>

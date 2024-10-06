@@ -5,6 +5,7 @@ import com.example.note.data.model.Note
 import com.example.note.data.model.Post
 import com.example.note.data.model.TaiKhoan
 import com.example.note.data.repository.repo.CommonRepository
+import com.example.note.uI.Calendar.CalendarToolsModel.MonHoc
 import javax.inject.Inject
 
 class CommonUseCase @Inject constructor(private val repository: CommonRepository) {
@@ -23,6 +24,6 @@ class CommonUseCase @Inject constructor(private val repository: CommonRepository
     suspend fun deleteMessage(id: Int) = repository.deleteMessage(id)
     suspend fun editMessage(message: Message) = repository.editMessage(message)
     suspend fun editPost(post: Post) = repository.editPost(post)
-
-
+    suspend fun getCalendar() = repository.getCalendar()
+    suspend fun editCalendar(schedule: List<MonHoc>) = repository.editCalendar(schedule)
 }

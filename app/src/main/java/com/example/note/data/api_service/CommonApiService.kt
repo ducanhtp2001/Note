@@ -9,6 +9,7 @@ import com.example.note.data.model.ResponseSinhVien
 import com.example.note.data.response.BaseResponse
 import com.example.note.data.response.CheckRegisterResponse
 import com.example.note.data.response.LoginResponse
+import com.example.note.uI.Calendar.model.ScheduleResponse
 import okhttp3.RequestBody
 import retrofit2.http.Body
 import retrofit2.http.POST
@@ -59,6 +60,12 @@ interface CommonApiService {
 
     @POST("deleteMessage.php")
     suspend fun deleteMessage(@Body request: RequestBody): BaseResponse?
+
+    @POST("getCalendar.php")
+    suspend fun getCalendar(@Body request: RequestBody): ScheduleResponse?
+
+    @POST("insertSchedule.php")
+    suspend fun editCalendar(@Body request: RequestBody): BaseResponse?
 
 
 //    @POST("getAvatarUrl.php")

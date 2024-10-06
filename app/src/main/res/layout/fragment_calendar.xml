@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="#29B8A7"
     tools:context=".uI.Calendar.CalendarFragment">
@@ -20,10 +21,12 @@
         android:layout_marginLeft="30dp"
         android:text="Thêm mới lịch học"/>
 
-    <ListView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/calendarListView"
         android:layout_width="360dp"
         android:layout_height="match_parent"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/schedule_layout"
         android:layout_gravity="center_horizontal"/>
 
 </LinearLayout>

@@ -6,6 +6,7 @@ import com.example.note.data.model.Note
 import com.example.note.data.model.Post
 import com.example.note.data.model.SinhVien
 import com.example.note.data.model.TaiKhoan
+import com.example.note.uI.Calendar.CalendarToolsModel.MonHoc
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import okhttp3.MediaType
@@ -66,6 +67,14 @@ class ModelHelper {
             return buildRequestBody(map)
         }
 
+        fun buildInsertScheduleRequestBody(idSinhVien: Int, schedules: List<MonHoc>): RequestBody {
+            val map = mutableMapOf<String, Any>(
+                "idSinhVien" to idSinhVien.toString(),
+                "schedules" to schedules
+            )
+            return buildRequestBody(map)
+        }
+
         fun buildEditMessageRequestBody(idSinhVien: Int, post: Message): RequestBody {
             val map = mutableMapOf(
                 "idPost" to post.idPost.toString(),
@@ -109,7 +118,12 @@ class ModelHelper {
             return RequestBody.create(mediaType, json)
         }
 
-        private fun buildRequestBody(map: Map<String, String>): RequestBody {
+//        private fun buildRequestBody(map: Map<String, String>): RequestBody {
+//            val json = gson.toJson(map)
+//            return RequestBody.create(mediaType, json)
+//        }
+
+        private fun buildRequestBody(map: Map<String, Any>): RequestBody {
             val json = gson.toJson(map)
             return RequestBody.create(mediaType, json)
         }

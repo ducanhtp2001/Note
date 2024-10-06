@@ -15,9 +15,12 @@ import com.example.note.data.model.ResponseClass
 import com.example.note.data.model.ResponseNote
 import com.example.note.data.model.ResponseSchedule
 import com.example.note.data.model.ResponseSinhVien
+import com.example.note.data.model.Schedule
 import com.example.note.data.model.TaiKhoan
 import com.example.note.data.response.BaseResponse
 import com.example.note.data.response.LoginResponse
+import com.example.note.uI.Calendar.CalendarToolsModel.MonHoc
+import com.example.note.uI.Calendar.model.ScheduleResponse
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
@@ -197,6 +200,30 @@ class CommonRepositoryImpl(
             val idSinhVien = AppState.getInstance().getSinhVien().id
             val body = ModelHelper.buildEditPostRequestBody(idSinhVien, post)
             val result = apiService.editPosts(body)
+            emit(result)
+        } catch (exception: Exception) {
+            emit(null)
+            throw exception
+        }
+    }
+
+    override suspend fun editCalendar(schedule: List<MonHoc>): Flow<BaseResponse?> = flow {
+        try {
+            val idSinhVien = AppState.getInstance().getSinhVien().id
+            val body = ModelHelper.buildInsertScheduleRequestBody(idSinhVien, schedule)
+            val result = apiService.editCalendar(body)
+            emit(result)
+        } catch (exception: Exception) {
+            emit(null)
+            throw exception
+        }
+    }
+
+    override suspend fun getCalendar(): Flow<ScheduleResponse?> = flow {
+        try {
+            val idSinhVien = AppState.getInstance().getSinhVien().id.guard { return@flow }
+            val body = ModelHelper.buildIDRequestBody(idSinhVien)
+            val result = apiService.getCalendar(body)
             emit(result)
         } catch (exception: Exception) {
             emit(null)
