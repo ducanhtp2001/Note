@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UI.home.add_note.AddNoteActivity">
+    tools:context=".uI.home.add_note.AddNoteActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -32,6 +32,7 @@
         </com.google.android.material.appbar.AppBarLayout>
 
        <com.google.android.material.card.MaterialCardView
+           android:id="@+id/cardNewPost"
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
            app:cardCornerRadius="3dp"
@@ -49,24 +50,29 @@
                    android:layout_width="50dp"
                    android:layout_height="50dp"
                    android:padding="5dp"
+                   android:focusable="false"
                    app:shapeAppearanceOverlay="@style/RoundedCornerImage"/>
 
-               <com.google.android.material.textfield.TextInputEditText
+               <TextView
                    android:id="@+id/edNewPost"
                    android:layout_width="0dp"
                    android:layout_height="50dp"
                    android:layout_weight="1"
                    app:endIconMode="clear_text"
                    app:boxStrokeWidth="1dp"
+                   android:gravity="center_vertical"
+                   android:padding="3dp"
                    android:hint="@string/bottom_sheet_new_post_hint"
+                   android:focusable="false"
                    app:startIconDrawable="@drawable/img"/>
 
                <com.google.android.material.imageview.ShapeableImageView
                    android:id="@+id/btnImage"
-                   android:layout_width="25dp"
-                   android:layout_height="25dp"
+                   android:layout_width="35dp"
+                   android:layout_height="35dp"
                    android:layout_marginHorizontal="5dp"
                    android:padding="5dp"
+                   android:focusable="false"
                    android:src="@drawable/ic_image"
                    app:shapeAppearanceOverlay="@style/RoundedCornerImage"/>
 

@@ -7,50 +7,50 @@
 
     <fragment
         android:id="@+id/nav_account"
-        android:name="com.example.note.UI.account.AccountFragment"
+        android:name="com.example.note.uI.account.AccountFragment"
         android:label="@string/menu_account"
         tools:layout="@layout/fragment_account" />
 
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.example.note.UI.home.home.HomeFragment"
+        android:name="com.example.note.uI.home.home.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/nav_trash"
-        android:name="com.example.note.UI.trash.TrashFragment"
+        android:name="com.example.note.uI.trash.TrashFragment"
         android:label="@string/menu_trash"
         tools:layout="@layout/fragment_trash" />
 
     <fragment
         android:id="@+id/nav_settings"
-        android:name="com.example.note.UI.settings.SettingsFragment"
+        android:name="com.example.note.uI.settings.SettingsFragment"
         android:label="@string/menu_settings"
         tools:layout="@layout/fragment_settings" />
 
     <fragment
         android:id="@+id/home"
-        android:name="com.example.note.UI.home.home.HomeFragment"
+        android:name="com.example.note.uI.home.home.HomeFragment"
         android:label="@string/bottom_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/calendar"
-        android:name="com.example.note.UI.Calendar.CalendarFragment"
+        android:name="com.example.note.uI.Calendar.CalendarFragment"
         android:label="@string/bottom_calendar"
         tools:layout="@layout/fragment_calendar" />
 
     <fragment
         android:id="@+id/school"
-        android:name="com.example.note.UI.School.school.SchoolFragment"
+        android:name="com.example.note.uI.School.school.SchoolFragment"
         android:label="@string/bottom_school"
         tools:layout="@layout/fragment_school" />
 
     <fragment
         android:id="@+id/setting"
-        android:name="com.example.note.UI.settings.SettingsFragment"
+        android:name="com.example.note.uI.settings.SettingsFragment"
         android:label="@string/bottom_setting"
         tools:layout="@layout/fragment_settings" />
 

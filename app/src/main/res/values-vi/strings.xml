@@ -47,10 +47,15 @@
     <string name="common_comment">Bình luận</string>
     <string name="common_comment_hint">Viết bình luận...</string>
     <string name="common_confirm">Xác nhận</string>
+    <string name="common_user_not_permission_edit_post">Bạn không có quyền chỉnh sửa nội dung này</string>
     <string name="common_confirm_delete">Bạn có muốn xóa mục này?</string>
     <string name="common_notice">Thông báo</string>
     <string name="common_permission_grant">Tính năng này cần bạn cấp phép</string>
     <string name="common_later">Để sau</string>
+
+    <string name="edit_post_title_edit">Chỉnh sửa bài đăng</string>
+    <string name="edit_post_title_new">Bài đăng mới</string>
+    <string name="edit_post_err_fill_content">Vui lòng nhập tin nhắn của bạn</string>
 
     <string name="bottom_sheet_title_post_list">Bài đăng</string>
     <string name="bottom_sheet_new_post_hint">Bài đăng mới</string>

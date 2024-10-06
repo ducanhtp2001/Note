@@ -4,20 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UI.home.add_note.AddNoteActivity">
+    tools:context=".uI.home.add_note.AddNoteActivity">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toStartOf="parent"
-            app:layout_constraintStart_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_alignParentTop="true">
 
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/topAppBar"
@@ -38,7 +35,8 @@
             android:id="@+id/swipeRefreshLayout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_below="@+id/appBarLayout"
+            android:layout_above="@+id/cardView">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/itemList"
@@ -49,11 +47,13 @@
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardCornerRadius="15dp"
             app:cardElevation="3dp"
-            android:padding="5dp">
+            android:padding="5dp"
+            android:layout_alignParentBottom="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -64,7 +64,7 @@
                 android:gravity="center_vertical">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edNewPost"
+                    android:id="@+id/edNewMessage"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:layout_weight="1"
@@ -77,8 +77,8 @@
 
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/btnImage"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
                     android:layout_marginHorizontal="5dp"
                     android:padding="5dp"
                     android:src="@drawable/ic_image"
@@ -86,8 +86,8 @@
 
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/btnSend"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
                     android:layout_marginHorizontal="5dp"
                     android:padding="5dp"
                     android:src="@drawable/ic_send"
@@ -96,6 +96,6 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-    </LinearLayout>
+    </RelativeLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

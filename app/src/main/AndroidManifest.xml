@@ -18,13 +18,13 @@
         android:theme="@style/Theme.Note"
         tools:targetApi="31">
         <activity
-            android:name=".UI.settings.ChangePassActivity"
+            android:name=".uI.settings.ChangePassActivity"
             android:exported="false" />
         <activity
-            android:name=".UI.School.show_class.ShowClassActivity"
+            android:name=".uI.School.show_class.ShowClassActivity"
             android:exported="false" />
         <activity
-            android:name=".UI.home.edit_note.EditNoteActivity"
+            android:name=".uI.home.edit_note.EditNoteActivity"
             android:theme="@style/AppTheme.EditNoteActivity">
 
             <!-- Other activity attributes -->
@@ -50,7 +50,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".UI.home.add_note.AddNoteActivity"
+            android:name=".uI.home.add_note.AddNoteActivity"
             android:configChanges="orientation|keyboardHidden|screenSize|locale"
             android:theme="@style/Theme.Note.NoActionBar" />
 

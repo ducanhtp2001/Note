@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:gravity="center"
     android:background="@drawable/change"
-    tools:context=".UI.settings.ChangePassActivity">
+    tools:context=".uI.settings.ChangePassActivity">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"

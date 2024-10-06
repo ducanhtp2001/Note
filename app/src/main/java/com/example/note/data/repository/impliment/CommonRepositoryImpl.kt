@@ -5,8 +5,8 @@ import com.example.note.data.api_service.CommonApiService
 import com.example.note.data.repository.repo.CommonRepository
 import com.example.note.data.response.CheckRegisterResponse
 import com.example.note.Tools.model_hepler.ModelHelper
-import com.example.note.UI.School.model.MessageResponse
-import com.example.note.UI.School.model.PostResponse
+import com.example.note.uI.School.model.MessageResponse
+import com.example.note.uI.School.model.PostResponse
 import com.example.note.data.AppState
 import com.example.note.data.model.Message
 import com.example.note.data.model.Note
@@ -184,7 +184,7 @@ class CommonRepositoryImpl(
         try {
             val idSinhVien = AppState.getInstance().getSinhVien().id
             val body = ModelHelper.buildEditMessageRequestBody(idSinhVien, message)
-            val result = apiService.editNote(body)
+            val result = apiService.editMessage(body)
             emit(result)
         } catch (exception: Exception) {
             emit(null)
@@ -196,7 +196,7 @@ class CommonRepositoryImpl(
         try {
             val idSinhVien = AppState.getInstance().getSinhVien().id
             val body = ModelHelper.buildEditPostRequestBody(idSinhVien, post)
-            val result = apiService.editNote(body)
+            val result = apiService.editPosts(body)
             emit(result)
         } catch (exception: Exception) {
             emit(null)

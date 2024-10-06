@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".UI.home.add_note.AddNoteActivity"
+    tools:context=".uI.home.add_note.AddNoteActivity"
     android:background="#fff8bb"
     tools:showIn="@layout/activity_add_note">
 

@@ -21,4 +21,4 @@
 #-renamesourcefileattribute SourceFile
 
 -keep class com.example.note.Model.* { *; }
--keep class com.example.note.UI.Calendar.CalendarToolsModel.* { *; }
+-keep class com.example.note.uI.Calendar.CalendarToolsModel.* { *; }

@@ -1,7 +1,7 @@
 package com.example.note.data.repository.repo
 
-import com.example.note.UI.School.model.MessageResponse
-import com.example.note.UI.School.model.PostResponse
+import com.example.note.uI.School.model.MessageResponse
+import com.example.note.uI.School.model.PostResponse
 import com.example.note.data.model.Message
 import com.example.note.data.model.Note
 import com.example.note.data.model.Post

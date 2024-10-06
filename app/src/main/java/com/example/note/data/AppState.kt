@@ -1,7 +1,7 @@
 package com.example.note.data
 
 import android.annotation.SuppressLint
-import com.example.note.UI.School.model.PostResult
+import com.example.note.uI.School.model.PostResult
 import com.example.note.data.model.Course
 import com.example.note.data.model.Note
 import com.example.note.data.model.SinhVien
@@ -25,6 +25,10 @@ class AppState {
         fun getInstance(): AppState {
             return Holder.INSTANCE
         }
+    }
+
+    fun isAppUser(id: Int): Boolean {
+        return sinhVien.id == id
     }
 
     fun clearData() {

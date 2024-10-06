@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#29B8A7"
-    tools:context=".UI.Calendar.CalendarFragment">
+    tools:context=".uI.Calendar.CalendarFragment">
 
     <CalendarView
         android:id="@+id/calendarView"

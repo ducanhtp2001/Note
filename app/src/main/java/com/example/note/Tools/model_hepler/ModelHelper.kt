@@ -54,6 +54,8 @@ class ModelHelper {
             val map = mutableMapOf(
                 "idSinhVien" to idSinhVien.toString(),
                 "thoiGian" to post.thoiGian.toString(),
+                "maMon" to post.maMon.toString(),
+                "lopTinChi" to post.lopTinChi.toString(),
                 "noiDung" to post.noiDung.toString(),
                 "coImg" to post.coImg.toString(),
                 "img" to post.img.toString(),
